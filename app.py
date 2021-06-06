@@ -2,8 +2,6 @@ import re
 from flask import Flask, render_template, request, redirect
 from flask_socketio import SocketIO, emit
 
-from local_settings import cliend_id
-
 app = Flask(__name__)
 app.debug = True
 
