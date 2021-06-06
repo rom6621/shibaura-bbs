@@ -1,11 +1,11 @@
-import re
-from flask import Flask, render_template, request, redirect
-from flask_socketio import SocketIO, emit
+from flask import Flask, render_template
 
 app = Flask(__name__)
 app.debug = True
 
-socketio = SocketIO(app)
+@app.route('/')
+def index():
+    return render_template('threadList.html')
 
 @app.route('/login')
 def login():
@@ -25,4 +25,4 @@ def displayThreadList():
 
 # 実行
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0' ,port=5000)
+    app.run()
