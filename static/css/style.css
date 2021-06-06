@@ -1,0 +1,95 @@
+body {
+    background-color: #f3fdfb;
+}
+
+nav form {
+    width: 35%;
+    min-width: 400px;
+}
+
+#login {
+    background-color: #c5f3e6;
+    color: #0b4e3c;
+    text-align: center;
+    margin-top: 100px;
+    width: 50%;
+}
+
+.container {
+    color: #0b4e3c;
+}
+
+textarea {
+    height: 500px;
+}
+
+.list-group a:hover {
+    background-color: #0b4e3c;
+    color: #ffffff;
+}
+
+.navbar-brand {
+    font-family: ta-fuga-fude, sans-serif;
+    font-style: normal;
+}
+
+#threadDetails {
+    background-color: #c5f3e6;
+    height: 200px;
+}
+
+#threadBord {
+    background-color: #c5f3e6;
+}
+
+#entries {
+    overflow-y: scroll;
+    height: 800px;
+}
+
+#entries::-webkit-scrollbar {
+    width: 10px;
+    padding-left: 10px;
+}
+
+#entries::-webkit-scrollbar-track {
+    background-color: #bbbbbb;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+
+#entries::-webkit-scrollbar-thumb {
+    background-color: #333333;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+
+#entryForm {
+    height: 40px;
+}
+
+#tagList {
+    width: 70%;
+}
+
+.bordered {
+    border:solid 2px #0b4e3c;
+}
+
+.btn-outline-success {
+    border-color: #0b4e3c;
+    background-color: #0b4e3c;
+    color: #ffffff;
+    border-width: 2px;
+}
+
+.btn-outline-success:hover {
+    border-color: #0b4e3c;
+    color: #0b4e3c;
+    background-color: #ffffff;
+    border-width: 2px;
+}
+
+#threadForm {
+    background-color: #c5f3e6;
+}
