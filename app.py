@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from local_settings import cliend_id
 
 app = Flask(__name__)
 app.debug = True
@@ -9,7 +10,7 @@ def index():
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    return render_template('login.html', cliend_id=cliend_id)
 
 @app.route('/makeThread')
 def makeThread():
