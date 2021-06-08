@@ -11,7 +11,5 @@ var socket = io.connect();
 
 // ログイン
 function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-    var email = profile.getEmail();
-    socket.emit('checkToken', email)
+    socket.emit('checkToken', googleUser);
 }
