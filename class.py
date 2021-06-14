@@ -9,7 +9,7 @@ class Entry:
         self.content = entryContent
 
     def deleteEntry(self):
-        self.content = "削除されました"
+        self.content = '削除されました'
 
 class Thread:
     id: int
@@ -28,4 +28,3 @@ class Thread:
         self.lastEntryId += 1
         new = Entry(self.lastEntryId, entryAuther, entryContent)
         self.entries.append(new)
-

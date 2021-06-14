@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from logging import debug
 from flask import Flask, render_template
 from local_settings import cliend_id
@@ -32,4 +33,4 @@ def checkToken(token):
 
 # 実行
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0' ,port=5000)
+    socketio.run(app, host='0.0.0.0', port=5000)
