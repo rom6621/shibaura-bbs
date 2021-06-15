@@ -14,7 +14,7 @@
 ### Return : UserID,MailAddress
 #################################################
 import sqlite3
-import class
+import user
 
 def User_Registration_Request(mailAddress):
     dbname = 'BBS.db' #データベース作成　or 参照
@@ -24,15 +24,15 @@ def User_Registration_Request(mailAddress):
 
     id = ''
     #DBの中のtableの中身を確認
-    cur.execute('SELECT mailAddress FROM User WHERE mailAddress = '+mailAddress)
+    cur.execute('SELECT mailAddress FROM User WHERE mailAddress = ' + mailAddress)
     
     #DB内になかった場合ユーザIDにNullを代入し、メールアドレスを返す
     if cur.fetchall() ==None :
         #ユーザID作成処理
-        id = MailAddress.split("@")[0]
+        id = mailAddress.split("@")[0]
 
         #tableへの登録
-        sql = 'INSERT INTO User (Userid, MailAddress) values ('+id+','+mailAddress+')'
+        sql = 'INSERT INTO User (Userid, MailAddress) values (' + id + ',' + mailAddress + ')'
         cur.execute(sql)
 
 
@@ -40,8 +40,9 @@ def User_Registration_Request(mailAddress):
     else:
         row = cur.fetchall()
         #tableがまだ決まっていないのでrow[0](UseID)
-        id = row[0] 
+        id = row[0]
 
-    user = class.User(id,mailAddress)
-    con.close()
+    tmpUser = user.User(id, mailAddress)
+
+    conn.close()
     return user

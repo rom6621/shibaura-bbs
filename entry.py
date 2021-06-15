@@ -20,7 +20,6 @@
 ### V1.3 : 修正者名, yyyy.mm.dd 改訂モジュール名を書く
 
 from flask import Flask, request, render_template
-import class
 
 class Entry:
     id: int #書込の順番
