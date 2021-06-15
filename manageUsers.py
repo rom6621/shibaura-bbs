@@ -24,7 +24,7 @@ def User_Registration_Request(mailAddress):
 
     id = ''
     #DBの中のtableの中身を確認
-    cur.execute('SELECT mailAddress FROM User WHERE mailAddress = ' + mailAddress)
+    cur.execute('SELECT mailAddress FROM User WHERE mailAddress =  '+ mailAddress)
     
     #DB内になかった場合ユーザIDにNullを代入し、メールアドレスを返す
     if cur.fetchall() ==None :
@@ -45,4 +45,4 @@ def User_Registration_Request(mailAddress):
     tmpUser = user.User(id, mailAddress)
 
     conn.close()
-    return user
+    return tmpUser
