@@ -30,6 +30,7 @@ class Thread:
         self.lastEntryId += 1
         new = entry.Entry(self.lastEntryId, entryAuther, entryContent)
         self.entries.append(new)
+        return new
 
 def analyzeKeyword(line):
 
@@ -53,4 +54,3 @@ def analyzeKeyword(line):
 
     # search_key[ [検索語句1,検索語句2,...], [タグ1,タグ2,....]]
     return search_keys
-    
