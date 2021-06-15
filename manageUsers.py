@@ -32,7 +32,7 @@ def User_Registration_Request(mailAddress):
         id = mailAddress.split("@")[0]
 
         #tableへの登録
-        sql = 'INSERT INTO User (Userid, MailAddress) values (' + id + ',' + mailAddress + ')'
+        sql = 'INSERT INTO User (userId, mailAddress) values (' + id + ',' + mailAddress + ')'
         cur.execute(sql)
 
 
