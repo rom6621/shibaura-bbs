@@ -22,6 +22,20 @@
 from flask import Flask, request, render_template
 import class
 
+class Entry:
+    id: int #書込の順番
+    auther: str
+    content: str
+
+    def __init__(self, entryId, entryAuther, entryContent):
+        self.id = entryId
+        self.auther = entryAuther
+        self.content = entryContent
+
+    def deleteEntry(self):
+        self.content = '削除されました'
+
+
 #書込みを登録する関数
 def writeEntry(thread, entryAuther, entryContent):
     thread.addEntry(entryAuther, entryContent)
