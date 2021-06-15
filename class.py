@@ -28,3 +28,11 @@ class Thread:
         self.lastEntryId += 1
         new = Entry(self.lastEntryId, entryAuther, entryContent)
         self.entries.append(new)
+
+class User:
+    id: str
+    mailAddress: str
+    
+    def __init__(self, userId, userMailAddress):
+        self.id = userId
+        self.mailAddress = userMailAddress

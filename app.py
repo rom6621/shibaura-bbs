@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-from logging import debug
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, request
 from local_settings import cliend_id
 from flask_socketio import SocketIO, emit
 
@@ -30,6 +28,7 @@ def displayThreadList():
 @socketio.on('checkToken')
 def checkToken(token):
     print(token)
+    return render_template('threadList.html')
 
 # 実行
 if __name__ == '__main__':
