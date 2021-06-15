@@ -1,5 +1,5 @@
 class Entry:
-    id: int
+    id: int #書込の順番
     auther: str
     content: str
 
@@ -16,13 +16,13 @@ class Thread:
     name: str
     details: str
     lastEntryId: int
+    entries = []
 
     def __init__(self, threadId, threadName, threadDetails):
         self.id = threadId
         self.name = threadName
         self.details = threadDetails
         self.lastEntryId = 0
-        self.entries = []
 
     def addEntry(self, entryAuther, entryContent):
         self.lastEntryId += 1
