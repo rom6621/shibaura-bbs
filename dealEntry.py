@@ -22,10 +22,14 @@
 from flask import Flask, request, render_template
 import class
 
+#書込みを登録する関数
 def writeEntry(thread, entryAuther, entryContent):
     thread.addEntry(entryAuther, entryContent)
-    addContents(new, thread)
+    #addEntryで作成されたnewインスタンスを用いて関数を呼び出す
+    #addContents(new, thread)_本物
+    d_addContents(new, thread)
 
+#書込みを削除する関数
 def deleteEntry(thread, entry):
     thread.deleteEntry()
     deleteContents(thread, entry)
