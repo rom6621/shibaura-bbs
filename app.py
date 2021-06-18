@@ -13,10 +13,9 @@ test1 = thread.Thread(1, "テストスレッド1", "1つ目のスレッド")
 test2 = thread.Thread(2, "テストスレッド2", "2つ目のスレッド")
 test3 = thread.Thread(3, "テストスレッド2", "2つ目のスレッド")
 
-for i in range(5):
-    test1.addEntry('名無し', str(i) + "個目の書込です")
-    test2.addEntry('名無し', str(i) + "個目の書込です")
-    test3.addEntry('名無し', str(i) + "個目の書込です")
+test1.addEntry('al19000', '1つめの書込')
+test1.addEntry('al19000', '2つめの書込')
+test1.addEntry('al19000', '3つめの書込')
 
 threads = [test1, test2, test3]
 
@@ -36,7 +35,7 @@ def makeThread():
 
 @app.route('/thread')
 def displayThread():
-    return render_template('thread.html')
+    return render_template('thread.html', thread=test1)
 
 @app.route('/threadList')
 def displayThreadList():

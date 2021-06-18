@@ -45,10 +45,16 @@
 
         <div class="my-3 p-4 rounded" id="threadBord">
             <div class="mb-4" id="entries">
-                <div class="rounded bg-light me-3" id="entry">
-                    <p class="px-3 pt-3">名無し</p>
-                    <p class="px-3 pb-3">書込内容</p>
-                </div>
+              {% if thread.entries %}
+                {% for entry in thread.entries %}
+                  <div class="rounded bg-light me-3" id="entry">
+                    <p class="px-3 pt-3">{{ entry.auther }}</p>
+                    <p class="px-3 pb-3">{{ entry.content }}</p>
+                  </div>
+                {% endfor %}
+              {% else %}
+                <p>書き込みが存在しません。<p>
+              {% endif %}
             </div>
             <form action="" class="input-group">
                 <input class="form-control me-3 rounded" type="text" name="content" id="">
