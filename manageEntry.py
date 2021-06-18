@@ -47,6 +47,7 @@ def Delete_Contents(userID,contentID):
     c = conn.cursor()
     data=('書込を削除しました.')
     c.execute('UPDATE Entry SET content = "'+data+'" WHERE auther = "'+userID+'" AND id = '+str(contentID)+'')
+    conn.commit()
     conn.close()
 
 #################################################
@@ -56,10 +57,12 @@ def Delete_Contents(userID,contentID):
 ### Function: userIDとcontentIDとcontentをDBに登録する
 ### Return : 
 #################################################
+
 #書込追加
 #書込を追加する
-def Add_Contents(userID,contentID,content):
+def Add_Contents(userID,threadID,content):
     conn = sqlite3.connect('test.db')
     c = conn.cursor()
-    c.execute('INSERT INTO Entry(id,auther,content) VALUES('+str(contentID)+',  "'+userID+'", "'+content+'")')
+    c.execute('INSERT INTO Entry(auther,threadID,content) VALUES("'+userID+'",'+str(threadID)+',"'+content+'")')
+    conn.commit()
     conn.close()
