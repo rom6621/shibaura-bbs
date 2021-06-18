@@ -14,9 +14,9 @@ test2 = thread.Thread(2, "テストスレッド2", "2つ目のスレッド")
 test3 = thread.Thread(3, "テストスレッド2", "2つ目のスレッド")
 
 for i in range(5):
-    test1.addEntry('名無し', i + "個目の書込です")
-    test2.addEntry('名無し', i + "個目の書込です")
-    test3.addEntry('名無し', i + "個目の書込です")
+    test1.addEntry('名無し', str(i) + "個目の書込です")
+    test2.addEntry('名無し', str(i) + "個目の書込です")
+    test3.addEntry('名無し', str(i) + "個目の書込です")
 
 threads = [test1, test2, test3]
 
