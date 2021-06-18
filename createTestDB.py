@@ -16,4 +16,5 @@ cur.execute('INSERT INTO User(id, mailAddress) values("al00000", "al00000@shibau
 cur.execute('INSERT INTO Thread(name, details) values("テストスレッド", "テストの内容です")')
 cur.execute('INSERT INTO Entry(threadID, auther, content) values(1, "al00000", "テストの書込です")')
 
+conn.commit()
 conn.close()
