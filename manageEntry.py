@@ -18,8 +18,11 @@ import sqlite3
 #書込情報問い合わせ
 #user_idとcontents_idが一致する書込がデータベースにあると0を返し、なかったら1を返す
 def Contents_Processing(userID,contentID):
+     #データベースに接続
     conn = sqlite3.connect('test.db')
+    #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
+    #Entryテーブルからcontentを抜き出す
     if(c.execute('SELECT content FROM Entry WHERE auther = "'+userID +'" AND id = '+str(contentID)+'')!=None):
         #書込があったとき
         conn.close()
@@ -43,9 +46,12 @@ def Contents_Processing(userID,contentID):
 #書込削除
 #user_idとcontents_idが一致する書込を更新する
 def Delete_Contents(userID,contentID):
+     #データベースに接続
     conn = sqlite3.connect('test.db')
+    #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
     data=('書込を削除しました.')
+    #contentを更新する
     c.execute('UPDATE Entry SET content = "'+data+'" WHERE auther = "'+userID+'" AND id = '+str(contentID)+'')
     conn.commit()
     conn.close()
@@ -61,8 +67,11 @@ def Delete_Contents(userID,contentID):
 #書込追加
 #書込を追加する
 def Add_Contents(userID,threadID,content):
+    #データベースに接続
     conn = sqlite3.connect('test.db')
+    #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
+    #userID,threadID,contentをEntryテーブルに追加する
     c.execute('INSERT INTO Entry(auther,threadID,content) VALUES("'+userID+'",'+str(threadID)+',"'+content+'")')
     conn.commit()
     conn.close()
