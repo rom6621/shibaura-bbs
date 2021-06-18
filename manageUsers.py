@@ -17,7 +17,7 @@ import sqlite3
 import user
 
 def User_Registration_Request(mailAddress):
-    dbname = 'BBS.db' #データベース作成　or 参照
+    dbname = 'test.db' #データベース作成　or 参照
     conn = sqlite3.connect(dbname)
     # sqliteを操作するカーソルオブジェクトを作成
     cur = conn.cursor()
@@ -43,5 +43,6 @@ def User_Registration_Request(mailAddress):
 
     tmpUser = user.User(id, mailAddress)
 
+    conn.commit()
     conn.close()
     return tmpUser
