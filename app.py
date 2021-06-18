@@ -35,7 +35,7 @@ def makeThread():
 
 @app.route('/thread')
 def displayThread():
-    return render_template('thread.html', thread = test1)
+    return render_template('thread.html', thread=test1)
 
 @app.route('/threadList')
 def displayThreadList():
