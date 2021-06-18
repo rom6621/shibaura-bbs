@@ -4,6 +4,8 @@
 ### Purpose : 書込情報管理部
 #################################################
 
+import sqlite3
+
 #################################################
 ### Function Name : Contents_Processing
 ### Designer : 保科貴大
@@ -12,7 +14,6 @@
 ###　　　　　　があるなら0,ないなら1を返す
 ### Return : 0または1
 #################################################
-import sqlite3
 
 #書込情報問い合わせ
 #user_idとcontents_idが一致する書込がデータベースにあると0を返し、なかったら1を返す
@@ -29,6 +30,16 @@ def Contents_Processing(userID,contentID):
         return 1
 
 
+
+#################################################
+### Function Name : Delete_Contents
+### Designer : 保科貴大
+### Date :  2021.6.18
+### Function: userIDとcontentIDからcontentを指定して
+###　　　　　　"書込を削除しました"に変更する
+### Return : 
+#################################################
+
 #書込削除
 #user_idとcontents_idが一致する書込を更新する
 def Delete_Contents(userID,contentID):
@@ -38,7 +49,13 @@ def Delete_Contents(userID,contentID):
     c.execute('UPDATE Entry SET content = "'+data+'" WHERE auther = "'+userID+'" AND id = '+str(contentID)+'')
     conn.close()
 
-
+#################################################
+### Function Name : Add_Contents
+### Designer : 保科貴大
+### Date :  2021.6.18
+### Function: userIDとcontentIDとcontentをDBに登録する
+### Return : 
+#################################################
 #書込追加
 #書込を追加する
 def Add_Contents(userID,contentID,content):
