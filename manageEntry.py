@@ -57,6 +57,7 @@ def Delete_Contents(userID,contentID):
 ### Function: userIDとcontentIDとcontentをDBに登録する
 ### Return : 
 #################################################
+
 #書込追加
 #書込を追加する
 def Add_Contents(userID,threadID,content):
