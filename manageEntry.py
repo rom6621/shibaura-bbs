@@ -6,6 +6,7 @@
 
 import sqlite3
 
+
 #################################################
 ### Function Name : contentsProcessing
 ### Designer : 保科貴大
@@ -55,6 +56,8 @@ def deleteContents(userID,contentID):
     c.execute('UPDATE Entry SET content = "'+data+'" WHERE auther = "'+userID+'" AND id = '+str(contentID)+'')
     conn.commit()
     conn.close()
+
+
 
 #################################################
 ### Function Name : addContents
