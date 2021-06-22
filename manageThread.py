@@ -66,7 +66,7 @@ def search(searchKeys):
             sql += ' name in ('
             for searchWord in searchWords:
                 sql += (' "' + searchWord + '",')
-            sql.rstrip()
+            sql = sql.rstrip(',')
             sql += ')'
             if len(searchTags) != 0:
                 sql += ' OR'
@@ -74,7 +74,8 @@ def search(searchKeys):
             sql += ' name in ('
             for searchTag in searchTags:
                 sql += (' "' + searchTag + '",')
-            sql.rstrip()
+            sql = sql.rstrip(',')
+
             sql += ')'
 
    # cur.execute(sql)
