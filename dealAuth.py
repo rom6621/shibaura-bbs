@@ -24,30 +24,30 @@ import manageUsers
 #################################################
 
 def takingGoogleMailProcessing(token):
-    JWKS_URI = 'https://www.googleapis.com/oauth2/v3/certs'
-    GOOGLE_ISSUER = 'accounts.google.com'
-    CLIENT_ID = cliend_id
-    id_token = token['qc']['id_token'] #tokenの中にあるid_tokenの中身
-    header = jwt.get_unverified_header(id_token) #id_tokenの中にあるheader
-    res = requests.get(JWKS_URI).json() #JWKS_URI内にあるjsonファイルの中身
+    jwksURI = 'https://www.googleapis.com/oauth2/v3/certs'
+    googleIssuer = 'accounts.google.com'
+    clientID = cliend_id
+    for keyFirst in token :
+        for keySecond in token[keyFirst] :
+            if (keySecond == 'id_token') :
+                idToken = token[keyFirst][keySecond] #tokenの中にあるid_tokenの中身
+    header = jwt.get_unverified_header(idToken) #id_tokenの中にあるheader
+    res = requests.get(jwksURI).json() #JWKS_URI内にあるjsonファイルの中身
     jwk = next(filter(lambda k: k['kid'] == header['kid'], res['keys'])) #res内にあるデコードに必要な情報
     public_key = RSAAlgorithm.from_jwk(json.dumps(jwk)) #jwkを元にしたデコード用の鍵
-    claims = jwt.decode(id_token,
+    claims = jwt.decode(idToken,
                         public_key,
-                        issuer=GOOGLE_ISSUER,
+                        issuer=googleIssuer,
                         algorithms=['RS256'],
-                        audience=CLIENT_ID) #id_tokenのデコード用
+                        audience=clientID) #id_tokenのデコード用
     #pprint(claims)
-    gmail_address = claims['email'] #Googleのメアド
-    invader_check = gmail_address.split('@') #外部のGoogleアカウントのチェック用
-    user_id = None #ユーザID、外部の場合はNoneのまま返る
+    gmailAddress = claims['email'] #Googleのメアド
+    invaderCheck = gmailAddress.split('@') #外部のGoogleアカウントのチェック用
+    userID = None #ユーザID、外部の場合はNoneのまま返る
     #芝浦のGoogleアカウントかどうかの確認、芝浦のものならば問い合わせを行う
-    if (invader_check[1] == 'shibaura-it.ac.jp') :
-        user_id = questionGmailProcessing(gmail_address)
-        #未登録かどうかの確認、未登録ならば登録を行う
-        if (user_id == None) :
-            user_id = makingAccountProcessing(gmail_address)
-    return user_id
+    if (invaderCheck[1] == 'shibaura-it.ac.jp') :
+        userID = questionGmailProcessing(gmailAddress)
+    return userID
 
 #################################################
 ### Function Name :questionGmailProcessing
@@ -55,26 +55,11 @@ def takingGoogleMailProcessing(token):
 ### Date :2021.06.11
 ### Function:受け取った学内のGmailアドレスを用い、
 ###          利用者情報管理部に問い合わせを行う
-### Return :user_id     --ユーザID
+### Return :userID     --ユーザID
 #################################################
 
-def questionGmailProcessing(gmail_address):
-    user_data = manageUsers.user_Registration_Request(gmail_address)
-    user_id = user_data[0]
-    gmail_address = user_data[1]
-    return user_id
-
-#################################################
-### Function Name :makingAccountProcessing
-### Designer :浅瀬石 遊那
-### Date :2021.06.11
-### Function:受け取った学内且つDBに未登録であるGmailアドレスを用い、
-###          利用者情報管理部に登録要求を行う
-### Return :user_id     --ユーザID
-#################################################
-
-def makingAccountProcessing(gmail):
-    user_data = manageUsers.makingRequestFromUserProcessing(gmail)
-    user_id = user_data[0]
-    gmail_address = user_data[1]
+def questionGmailProcessing(gmailAddress):
+    userData = manageUsers.User_Registration_Request(gmailAddress)
+    userID = userData.id
+    mailAddress = userData.mailAddress
     return user_id

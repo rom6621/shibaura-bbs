@@ -34,10 +34,10 @@ def test():
     return redirect(url_for('displayThreadList'))
 
 @socketio.on('checkToken')
-def checkToken(token):
-    user_id=dealAuth.takingGoogleMailProcessing(token)
-    print(user_id)
-    if (user_id == None) :
+def checkToken(token) :
+    userID=dealAuth.takingGoogleMailProcessing(token)
+    print(userID)
+    if (userID == None) :
         print('a')
     else :
         print('b')
