@@ -5,6 +5,7 @@
 #################################################
 
 import sqlite3
+import clasees
 
 
 #################################################
@@ -18,21 +19,24 @@ import sqlite3
 
 #書込情報問い合わせ
 #user_idとcontents_idが一致する書込がデータベースにあると0を返し、なかったら1を返す
-def contentsProcessing(userID,contentID):
+def contentsProcessing(threadId):
+    entries = []
      #データベースに接続
     conn = sqlite3.connect('test.db')
     #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
     #Entryテーブルからcontentを抜き出す
-    if(c.execute('SELECT content FROM Entry WHERE auther = "'+userID +'" AND id = '+str(contentID)+'')!=None):
-        #書込があったとき
-        conn.close()
-        return 0
-    else:
-        #書込がなかったとき
-        conn.close()
-        return 1
-
+    c.execute('SELECT * FROM Entry WHERE threadId = '+str(threadId)+' ORDER BY id ASC  ')
+    results = c.fetchall()
+    for(result in results):
+        id = result[0]
+        auther = result[2]
+        content = result[3]
+        new = clasees.Entry(id,auther,content)
+        entries.append(new)
+    conn.close()
+    return entries
+    
 
 
 #################################################
