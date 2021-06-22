@@ -7,7 +7,7 @@
 import sqlite3
 
 #################################################
-### Function Name : Contents_Processing
+### Function Name : contentsProcessing
 ### Designer : 保科貴大
 ### Date :  2021.6.18
 ### Function: userIDとcontentIDからcontentを抜き出しcontentが
@@ -17,7 +17,7 @@ import sqlite3
 
 #書込情報問い合わせ
 #user_idとcontents_idが一致する書込がデータベースにあると0を返し、なかったら1を返す
-def Contents_Processing(userID,contentID):
+def contentsProcessing(userID,contentID):
      #データベースに接続
     conn = sqlite3.connect('test.db')
     #sqliteを操作するカーソルオブジェクトを作成
@@ -35,7 +35,7 @@ def Contents_Processing(userID,contentID):
 
 
 #################################################
-### Function Name : Delete_Contents
+### Function Name : deleteContents
 ### Designer : 保科貴大
 ### Date :  2021.6.18
 ### Function: userIDとcontentIDからcontentを指定して
@@ -45,7 +45,7 @@ def Contents_Processing(userID,contentID):
 
 #書込削除
 #user_idとcontents_idが一致する書込を更新する
-def Delete_Contents(userID,contentID):
+def deleteContents(userID,contentID):
      #データベースに接続
     conn = sqlite3.connect('test.db')
     #sqliteを操作するカーソルオブジェクトを作成
@@ -57,7 +57,7 @@ def Delete_Contents(userID,contentID):
     conn.close()
 
 #################################################
-### Function Name : Add_Contents
+### Function Name : addContents
 ### Designer : 保科貴大
 ### Date :  2021.6.18
 ### Function: userIDとcontentIDとcontentをDBに登録する
@@ -66,7 +66,7 @@ def Delete_Contents(userID,contentID):
 
 #書込追加
 #書込を追加する
-def Add_Contents(userID,threadID,content):
+def addContents(userID,threadID,content):
     #データベースに接続
     conn = sqlite3.connect('test.db')
     #sqliteを操作するカーソルオブジェクトを作成
