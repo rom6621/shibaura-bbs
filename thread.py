@@ -39,6 +39,10 @@ def analyzeKeyword(line):
     searchWords = []
     searchTags = []
 
+    #全角スペースを削除
+    table = str.maketrans({'\u3000':' '})
+    line = line.translate(table)
+
     # スペース文字で文字列を分解
     keywords = line.split(" ")
 

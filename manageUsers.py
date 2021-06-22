@@ -24,25 +24,30 @@ def User_Registration_Request(mailAddress):
 
     id = ''
     #DBの中のtableの中身を確認
-    cur.execute('SELECT mailAddress FROM User WHERE mailAddress = " '+ mailAddress+'"')
+    cur.execute('SELECT mailAddress FROM User WHERE mailAddress = "%s"' % mailAddress)
     row = cur.fetchall()
-    #DB内になかった場合ユーザIDにNullを代入し、メールアドレスを返す
+
+    #DB内になかった場合ユーザIDに作成したidを代入し、ユーザidとメールアドレスをもったクラスを返す
     if len(row) == 0 :
         #ユーザID作成処理
         id = mailAddress.split("@")[0]
 
         #tableへの登録
-        sql = 'INSERT INTO User (id, mailAddress) values ("' + id + '", "' + mailAddress + '" )'
+        sql = 'INSERT INTO User(id, mailAddress) values ("' + id + '", "' + mailAddress + '" )'
         cur.execute(sql)
 
 
     #DB内にあったとき
     else:
+        #行を再取得
+        cur.execute('SELECT * FROM User WHERE mailAddress = "%s"' % mailAddress)
+        row = cur.fetchall()
+        
+
         #tableがまだ決まっていないのでrow[0](UseID)
-        id = row[0]
+        id = row[0][0]
 
     tmpUser = user.User(id, mailAddress)
-
     conn.commit()
     conn.close()
     return tmpUser
