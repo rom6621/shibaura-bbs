@@ -42,9 +42,10 @@ def User_Registration_Request(mailAddress):
         #行を再取得
         cur.execute('SELECT * FROM User WHERE mailAddress = "%s"' % mailAddress)
         row = cur.fetchall()
+        
 
         #tableがまだ決まっていないのでrow[0](UseID)
-        id = row[0]
+        id = row[0][0]
 
     tmpUser = user.User(id, mailAddress)
     conn.commit()
