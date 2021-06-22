@@ -13,7 +13,7 @@
 #################################################
 
 import sqlite3
-import thread
+import clasees
 # スレッド情報登録
 
 
@@ -38,7 +38,7 @@ def threadRegistration(name, details):
     cur.close()
     conn.close()
 
-    newThread = thread.Thread(threadId, name, details)
+    newThread = clasees.Thread(threadId, name, details)
 
     return newThread
 
@@ -87,7 +87,7 @@ def search(searchKeys):
         id = result[0]
         name = result[1]
         details = result[2]
-        newThread = thread.Thread(id, name, details)
+        newThread = clasees.Thread(id, name, details)
         resultThreads.append(newThread)
 
     cur.close()

@@ -2,16 +2,16 @@ from threading import Thread
 from flask import Flask, render_template, redirect, url_for, request
 from local_settings import cliend_id
 from flask_socketio import SocketIO, emit
-import thread
+import clasees
 
 app = Flask(__name__)
 socketio = SocketIO(app)
 
 ###################テストデータ###################
 
-test1 = thread.Thread(1, "テストスレッド1", "1つ目のスレッド")
-test2 = thread.Thread(2, "テストスレッド2", "2つ目のスレッド")
-test3 = thread.Thread(3, "テストスレッド2", "2つ目のスレッド")
+test1 = clasees.Thread(1, "テストスレッド1", "1つ目のスレッド")
+test2 = clasees.Thread(2, "テストスレッド2", "2つ目のスレッド")
+test3 = clasees.Thread(3, "テストスレッド2", "2つ目のスレッド")
 
 test1.addEntry('al19000', '1つめの書込')
 test1.addEntry('al19000', '2つめの書込')
