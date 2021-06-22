@@ -36,7 +36,7 @@ class Thread:
 
     def addEntry(self, entryAuther, entryContent):
         self.lastEntryId += 1
-        new = entry.Entry(self.lastEntryId, entryAuther, entryContent)
+        new = Entry(self.lastEntryId, entryAuther, entryContent)
         self.entries.append(new)
         return new
 

@@ -11,7 +11,7 @@
 # Function: C1 UI処理部から渡された検索語句とタグをC6スレッド情報管理部に渡す。
 # Return : search_word,search_tag
 #################################################
-import classes
+import clasees
 
 def analyzeKeyword(line):
 
