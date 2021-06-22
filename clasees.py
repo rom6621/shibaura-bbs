@@ -18,9 +18,27 @@
 ### Return :
 #################################################
 
-from flask import Flask, request, render_template
 import thread
 import manageEntry
+
+class Thread:
+    id: int
+    name: str
+    details: str
+    lastEntryId: int
+    entries = []
+
+    def __init__(self, threadId, threadName, threadDetails):
+        self.id = threadId
+        self.name = threadName
+        self.details = threadDetails
+        self.lastEntryId = 0
+
+    def addEntry(self, entryAuther, entryContent):
+        self.lastEntryId += 1
+        new = Entry(self.lastEntryId, entryAuther, entryContent)
+        self.entries.append(new)
+        return new
 
 class Entry:
     id: int #書込の順番
@@ -35,6 +53,14 @@ class Entry:
     def exchangeContent(self):
         self.content = '削除されました'
         return self
+
+class User:
+    id: str
+    mailAddress: str
+    
+    def __init__(self, userId, userMailAddress):
+        self.id = userId
+        self.mailAddress = userMailAddress
 
 #書込みを登録する関数
 def writeEntry(thread, entryAuther, entryContent):

@@ -13,7 +13,7 @@
 #################################################
 
 import sqlite3
-import thread
+import clasees
 # スレッド情報登録
 
 
@@ -38,7 +38,7 @@ def threadRegistration(name, details):
     cur.close()
     conn.close()
 
-    newThread = thread.Thread(threadId, name, details)
+    newThread = clasees.Thread(threadId, name, details)
 
     return newThread
 
@@ -56,10 +56,13 @@ def search(searchKeys):
     searchWords = searchKeys[0]
     searchTags = searchKeys[1]
 
+    resultThreads = []
+
     conn = sqlite3.connect("test.db")
     cur = conn.cursor()
 
     sql = 'SELECT * FROM Thread'
+    
     if (len(searchWords) != 0) or (len(searchTags) != 0):
         sql += ' WHERE'
         if len(searchWords) != 0:
@@ -71,19 +74,23 @@ def search(searchKeys):
             if len(searchTags) != 0:
                 sql += ' OR'
         if len(searchTags) != 0:
-            sql += ' name in ('
+            sql += ' tags IN ('
             for searchTag in searchTags:
                 sql += (' "' + searchTag + '",')
             sql = sql.rstrip(',')
-
             sql += ')'
 
-   # cur.execute(sql)
+    cur.execute(sql)
+    results = cur.fetchall()
 
-    # searchKey = cur.fetchall[0]'''
-    print(sql)
+    for result in results:
+        id = result[0]
+        name = result[1]
+        details = result[2]
+        newThread = clasees.Thread(id, name, details)
+        resultThreads.append(newThread)
+
     cur.close()
     conn.close()
 
-   # return searchKey
-search([['aa', 'a'], ['b']])
+    return resultThreads

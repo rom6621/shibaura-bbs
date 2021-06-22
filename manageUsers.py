@@ -14,7 +14,7 @@
 ### Return : UserID,MailAddress
 #################################################
 import sqlite3
-import user
+import clasees
 
 def userRegistrationRequest(mailAddress):
     dbname = 'test.db' #データベース作成　or 参照
@@ -47,7 +47,7 @@ def userRegistrationRequest(mailAddress):
         #tableがまだ決まっていないのでrow[0](UseID)
         id = row[0][0]
 
-    tmpUser = user.User(id, mailAddress)
+    tmpUser = clasees.User(id, mailAddress)
     conn.commit()
     conn.close()
     return tmpUser

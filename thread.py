@@ -11,28 +11,7 @@
 # Function: C1 UI処理部から渡された検索語句とタグをC6スレッド情報管理部に渡す。
 # Return : search_word,search_tag
 #################################################
-import entry
-
-
-class Thread:
-    id: int
-    name: str
-    details: str
-    lastEntryId: int
-    entries = []
-
-    def __init__(self, threadId, threadName, threadDetails):
-        self.id = threadId
-        self.name = threadName
-        self.details = threadDetails
-        self.lastEntryId = 0
-
-    def addEntry(self, entryAuther, entryContent):
-        self.lastEntryId += 1
-        new = entry.Entry(self.lastEntryId, entryAuther, entryContent)
-        self.entries.append(new)
-        return new
-
+import clasees
 
 def analyzeKeyword(line):
 

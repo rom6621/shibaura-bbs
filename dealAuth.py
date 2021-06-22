@@ -59,7 +59,7 @@ def takingGoogleMailProcessing(token):
 #################################################
 
 def questionGmailProcessing(gmailAddress):
-    userData = manageUsers.User_Registration_Request(gmailAddress)
+    userData = manageUsers.userRegistrationRequest(gmailAddress)
     userID = userData.id
     mailAddress = userData.mailAddress
-    return user_id
+    return userID
