@@ -13,27 +13,34 @@
 #################################################
 
 import sqlite3
+import thread
+# スレッド情報登録
 
 
-def Thread_Registration(threadName, tagName):
+def threadRegistration(name, details):
 
     conn = sqlite3.connect("test.db")
+    # データベース作成
     cur = conn.cursor()
+    # カーソルオブジェクトの作成
 
-    sql = 'INSERT INTO thread (threadName, tagName) values ("' + \
-        threadName + '","' + tagName + '")'
+    sql = 'INSERT INTO Thread (name, details) values ("' + \
+        name + '","' + details + '")'
+    # threadテーブルへスレッド名とタグ名の登録
     cur.execute(sql)
 
-    sql = 'SELECT threadID FROM thread ORDER BY threadID DESC LIMIT 1'
-
+    sql = 'SELECT threadID FROM Thread ORDER BY threadID DESC LIMIT 1'
+    # スレッドIDを抽出
     cur.execute(sql)
 
-    threadID = cur.fetchall[0]
+    threadId = cur.fetchall[0]
 
     cur.close()
     conn.close()
 
-    return threadID
+    newThread = thread.Thread(threadId, name, details)
+
+    return newThread
 
 
 #################################################
@@ -44,12 +51,12 @@ def Thread_Registration(threadName, tagName):
 # Return :
 #################################################
 
-
+# スレッド検索
 def search(searchKeys):
     searchWords = searchKeys[0]
     searchTags = searchKeys[1]
 
-    conn = sqlite3.connect("tes")
+    conn = sqlite3.connect("test.db")
     cur = conn.cursor()
 
     sql = 'SELECT * FROM Thread'
@@ -58,23 +65,25 @@ def search(searchKeys):
         if len(searchWords) != 0:
             sql += ' name in ('
             for searchWord in searchWords:
-                sql += ('"' + searchWord + '", ')
-            sql.pop()
+                sql += (' "' + searchWord + '",')
+            sql = sql.rstrip(',')
             sql += ')'
             if len(searchTags) != 0:
                 sql += ' OR'
         if len(searchTags) != 0:
             sql += ' name in ('
             for searchTag in searchTags:
-                sql += ('"' + searchTag + '", ')
-            sql.pop()
+                sql += (' "' + searchTag + '",')
+            sql = sql.rstrip(',')
+
             sql += ')'
 
-    cur.execute(sql)
+   # cur.execute(sql)
 
-    searchKey = cur.fetchall[0]
-
+    # searchKey = cur.fetchall[0]'''
+    print(sql)
     cur.close()
     conn.close()
 
-    return searchKey
+   # return searchKey
+search([['aa', 'a'], ['b']])
