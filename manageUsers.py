@@ -6,7 +6,7 @@
 #################################################
 
 #################################################
-### Function Name : User_Registration_Request
+### Function Name : userRegistrationRequest
 ### Designer : 鈴木一史
 ### Date : 2021.06.11
 ### Function: DBに利用者情報を問い合わせ、登録済みであればUserIDとMailAddressを返し、
@@ -16,7 +16,7 @@
 import sqlite3
 import user
 
-def User_Registration_Request(mailAddress):
+def userRegistrationRequest(mailAddress):
     dbname = 'test.db' #データベース作成　or 参照
     conn = sqlite3.connect(dbname)
     # sqliteを操作するカーソルオブジェクトを作成
