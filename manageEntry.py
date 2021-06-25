@@ -43,8 +43,8 @@ def contentsProcessing(threadId):
 ### Function Name : deleteContents
 ### Designer : 保科貴大
 ### Date :  2021.6.18
-### Function: userIDとcontentIDからcontentを指定して
-###　　　　　　"書込を削除しました"に変更する
+### Function: entry.idとentry.idからcontentを指定して
+###　　　　　　"書込を更新する
 ### Return : 
 #################################################
 
@@ -66,18 +66,18 @@ def deleteContents(entry):
 ### Function Name : addContents
 ### Designer : 保科貴大
 ### Date :  2021.6.18
-### Function: userIDとcontentIDとcontentをDBに登録する
+### Function: entry.auther,entry.content,threadをDBに登録する
 ### Return : 
 #################################################
 
 #書込追加
 #書込を追加する
-def addContents(entry,thread):
+def addContents(entry,threadId):
     #データベースに接続
     conn = sqlite3.connect('test.db')
     #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
     #userID,threadID,contentをEntryテーブルに追加する
-    c.execute('INSERT INTO Entry(auther,threadID,content) VALUES("'+entry.auther+'",'+str(thread)+',"'+entry.content+'")')
+    c.execute('INSERT INTO Entry(auther,threadID,content) VALUES("'+entry.auther+'",'+str(threadId)+',"'+entry.content+'")')
     conn.commit()
     conn.close()
