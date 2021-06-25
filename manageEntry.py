@@ -50,14 +50,13 @@ def contentsProcessing(threadId):
 
 #書込削除
 #user_idとcontents_idが一致する書込を更新する
-def deleteContents(userID,contentID):
+def deleteContents(entry):
      #データベースに接続
     conn = sqlite3.connect('test.db')
     #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
-    data=('書込を削除しました.')
     #contentを更新する
-    c.execute('UPDATE Entry SET content = "'+data+'" WHERE auther = "'+userID+'" AND id = '+str(contentID)+'')
+    c.execute('UPDATE Entry SET content = "'+entry.content+'" WHERE auther = "'+entry.auther+'" AND id = '+str(entry.id)+'')
     conn.commit()
     conn.close()
 
@@ -73,12 +72,12 @@ def deleteContents(userID,contentID):
 
 #書込追加
 #書込を追加する
-def addContents(userID,threadID,content):
+def addContents(entry,thread):
     #データベースに接続
     conn = sqlite3.connect('test.db')
     #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
     #userID,threadID,contentをEntryテーブルに追加する
-    c.execute('INSERT INTO Entry(auther,threadID,content) VALUES("'+userID+'",'+str(threadID)+',"'+content+'")')
+    c.execute('INSERT INTO Entry(auther,threadID,content) VALUES("'+entry.auther+'",'+str(thread)+',"'+entry.content+'")')
     conn.commit()
     conn.close()
