@@ -42,8 +42,10 @@ class Thread:
 
     #スレッドを呼び出す際に、entriesに関連した書込みを配列に入れる関数
     def getEntry(self):
-        for i in range(self.lastEntryId)
-            self.entries[i] =
+        new = []
+        new = manageEntry.contentsProcessing(self.id)
+        for i in new:
+            self.entries.append(i)
 
     #新しい書き込みをthreadに関連したentry
     def writeEntry(self, entryAuther, entryContent):
