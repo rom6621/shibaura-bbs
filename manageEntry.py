@@ -7,7 +7,6 @@
 import sqlite3
 import classes
 
-
 #################################################
 ### Function Name : contentsProcessing
 ### Designer : 保科貴大
@@ -18,7 +17,7 @@ import classes
 #################################################
 
 #書込情報問い合わせ
-#user_idとcontents_idが一致する書込がデータベースにあると0を返し、なかったら1を返す
+
 def contentsProcessing(threadId):
     entries = []
      #データベースに接続
@@ -39,7 +38,6 @@ def contentsProcessing(threadId):
     return entries
 
 
-
 #################################################
 ### Function Name : deleteContents
 ### Designer : 保科貴大
@@ -50,7 +48,7 @@ def contentsProcessing(threadId):
 #################################################
 
 #書込削除
-#user_idとcontents_idが一致する書込を更新する
+
 def deleteContents(entry):
      #データベースに接続
     conn = sqlite3.connect('test.db')
@@ -63,7 +61,6 @@ def deleteContents(entry):
     conn.close()
 
 
-
 #################################################
 ### Function Name : addContents
 ### Designer : 保科貴大
@@ -73,7 +70,7 @@ def deleteContents(entry):
 #################################################
 
 #書込追加
-#書込を追加する
+
 def addContents(entry,threadId):
     #データベースに接続
     conn = sqlite3.connect('test.db')
