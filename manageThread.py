@@ -66,19 +66,12 @@ def search(searchKeys):
     if (len(searchWords) != 0) or (len(searchTags) != 0):
         sql += ' WHERE'
         if len(searchWords) != 0:
-            sql += ' name IN ('
             for searchWord in searchWords:
-                sql += (' "' + searchWord + '",')
-            sql = sql.rstrip(',')
-            sql += ')'
-            if len(searchTags) != 0:
-                sql += ' OR'
+                sql += (' name LIKE "%' + searchWord + '%" OR')
         if len(searchTags) != 0:
-            sql += ' tags IN ('
             for searchTag in searchTags:
-                sql += (' "' + searchTag + '",')
-            sql = sql.rstrip(',')
-            sql += ')'
+                sql += ('tags LIKE "%' + searchTag + '%" OR')
+        sql = sql.rstrip(' OR')
 
     cur.execute(sql)
     results = cur.fetchall()
