@@ -62,11 +62,11 @@ def search(searchKeys):
     cur = conn.cursor()
 
     sql = 'SELECT * FROM Thread'
-    
+
     if (len(searchWords) != 0) or (len(searchTags) != 0):
         sql += ' WHERE'
         if len(searchWords) != 0:
-            sql += ' name in ('
+            sql += ' name IN ('
             for searchWord in searchWords:
                 sql += (' "' + searchWord + '",')
             sql = sql.rstrip(',')
