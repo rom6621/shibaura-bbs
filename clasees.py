@@ -40,6 +40,18 @@ class Thread:
         self.entries.append(new)
         return new
 
+    #スレッドを呼び出す際に、entriesに関連した書込みを配列に入れる関数
+    def getEntry(self):
+        for i in range(self.lastEntryId)
+            self.entries[i] =
+
+    #新しい書き込みをthreadに関連したentry
+    def writeEntry(self, entryAuther, entryContent):
+        newEntry = self.addEntry(entryAuther, entryContent)
+        #addEntryで作成されたnewインスタンスを用いて関数を呼び出す
+        newThread = addContents(new, thread)
+        return newThread
+
 class Entry:
     id: int #書込の順番
     auther: str
@@ -54,10 +66,17 @@ class Entry:
         self.content = '削除されました'
         return self
 
+    #書込みを削除する関数
+    def deleteEntry(self):
+        #書き込み内容のみを置き換えたものをnewインスタンスに入れる
+        newEntry = self.exchangeContent()
+        newThread = deleteContents(newEntry, self.id)
+        return newThread
+
 class User:
     id: str
     mailAddress: str
-    
+
     def __init__(self, userId, userMailAddress):
         self.id = userId
         self.mailAddress = userMailAddress
@@ -70,8 +89,8 @@ def writeEntry(thread, entryAuther, entryContent):
     return newThread
 
 #書込みを削除する関数
-def deleteEntry(thread, entry):
+def deleteEntry(entryId):
     #書き込み内容のみを置き換えたものをnewインスタンスに入れる
     newEntry = entry.exchangeContent()
-    newThread = deleteContents(new, thread)
+    newThread = deleteContents(newEntry, self.id)
     return newThread
