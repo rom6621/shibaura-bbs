@@ -26,9 +26,9 @@ def contentsProcessing(threadId):
     #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
     #Entryテーブルからcontentを抜き出す
-    c.execute('SELECT * FROM Entry WHERE threadId = '　+str(threadId)+　' ORDER BY id ASC  ')
+    c.execute('SELECT * FROM Entry WHERE threadId = ' +str(threadId)+ ' ORDER BY id ASC  ')
     results = c.fetchall()
-    for　result in results:
+    for result in results:
         id = result[0]
         auther = result[2]
         content = result[3]
@@ -57,7 +57,7 @@ def deleteContents(entry):
     #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
     #contentを更新する
-    c.execute('UPDATE Entry SET content = "'　+entry.content+　'" WHERE auther = "'　+entry.auther+　'" AND id = '　+str(entry.id)+　'')
+    c.execute('UPDATE Entry SET content = "' +entry.content+ '" WHERE auther = "' +entry.auther+ '" AND id = ' +str(entry.id)+ '')
     c.close()
     conn.commit()
     conn.close()
@@ -80,7 +80,7 @@ def addContents(entry,threadId):
     #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
     #userID,threadID,contentをEntryテーブルに追加する
-    c.execute('INSERT INTO Entry(auther,threadID,content) VALUES("'　+entry.auther+　'",'　+str(threadId)+　',"'　+entry.content+　'")')
+    c.execute('INSERT INTO Entry(auther,threadID,content) VALUES("' +entry.auther+ '",' +str(threadId)+ ',"' +entry.content+ '")')
     c.close()
     conn.commit()
     conn.close()
