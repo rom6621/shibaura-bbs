@@ -38,7 +38,7 @@ def threadRegistration(name, details):
     cur.close()
     conn.close()
 
-    newThread = clasees.Thread(threadId, name, details)
+    newThread = classes.Thread(threadId, name, details)
     # newThreadにスレッドの情報を入れる
     return newThread
 
@@ -85,7 +85,7 @@ def search(searchKeys):
         id = result[0]
         name = result[1]
         details = result[2]
-        newThread = clasees.Thread(id, name, details)
+        newThread = classes.Thread(id, name, details)
         resultThreads.append(newThread)
         # resultThreadにnewThreadを追加
 
