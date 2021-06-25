@@ -53,10 +53,16 @@ class Thread:
 
     #新しい書き込みをthreadに関連したentry
     def writeEntry(self, entryAuther, entryContent):
+        #引数から新しい書込を作る
         newEntry = self.addEntry(entryAuther, entryContent)
-        #addEntryで作成されたnewインスタンスを用いて関数を呼び出す
-        newThread = addContents(new, thread)
-        return newThread
+        #addEntryで作成されたnewEntryを用いて関数を呼び出す
+        addContents(newEntry, self)
+
+    #書込みを削除する関数
+    def deleteEntry(self, id):
+        #渡されたidの書込の内容を書き換える
+        self.entries[id].content = '削除されました'
+        deleteContents(self.entries[id], self.id)
 
 class Entry:
     id: int #書込の順番
@@ -76,8 +82,7 @@ class Entry:
     def deleteEntry(self):
         #書き込み内容のみを置き換えたものをnewインスタンスに入れる
         newEntry = self.exchangeContent()
-        newThread = deleteContents(newEntry, self.id)
-        return newThread
+        deleteContents(newEntry, self.id)
 
 class User:
     id: str
