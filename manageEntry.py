@@ -26,7 +26,7 @@ def contentsProcessing(threadId):
     #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
     #Entryテーブルからcontentを抜き出す
-    c.execute('SELECT * FROM Entry WHERE threadId = '+str(threadId)+' ORDER BY id ASC  ')
+    c.execute('SELECT * FROM Entry WHERE threadId = '　+str(threadId)+　' ORDER BY id ASC  ')
     results = c.fetchall()
     for　result in results:
         id = result[0]
