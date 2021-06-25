@@ -35,9 +35,9 @@ class Thread:
         self.lastEntryId = 0
 
     #引数から新しい書込を作る関数
-    def addEntry(self, entryAuther, entryContent):
+    def addEntry(self, entryAuthor, entryContent):
         self.lastEntryId += 1
-        newEntry = Entry(self.lastEntryId, entryAuther, entryContent)
+        newEntry = Entry(self.lastEntryId, entryAuthor, entryContent)
         #作った書込をThreadクラスに格納する
         self.entries.append(newEntry)
         #addEntryで作成されたnewEntryを用いて関数を呼び出す
@@ -62,12 +62,12 @@ class Thread:
 
 class Entry:
     id: int #書込の順番
-    auther: str
+    author: str
     content: str
 
-    def __init__(self, entryId, entryAuther, entryContent):
+    def __init__(self, entryId, entryAuthor, entryContent):
         self.id = entryId
-        self.auther = entryAuther
+        self.author = entryAuthor
         self.content = entryContent
 
 class User:
