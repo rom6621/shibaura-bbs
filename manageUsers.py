@@ -14,7 +14,7 @@
 ### Return : UserID,MailAddress
 #################################################
 import sqlite3
-import clasees
+import classes
 
 def userRegistrationRequest(mailAddress):
     dbname = 'test.db' #データベース作成　or 参照
@@ -42,7 +42,7 @@ def userRegistrationRequest(mailAddress):
         #行を再取得
         cur.execute('SELECT * FROM User WHERE mailAddress = "%s"' % mailAddress)
         row = cur.fetchall()
-        
+
 
         #tableがまだ決まっていないのでrow[0](UseID)
         id = row[0][0]

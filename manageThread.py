@@ -13,7 +13,7 @@
 #################################################
 
 import sqlite3
-import clasees
+import classes
 # スレッド情報登録
 
 

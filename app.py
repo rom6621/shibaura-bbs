@@ -2,7 +2,7 @@ from threading import Thread
 from flask import Flask, render_template, redirect, url_for, request
 from local_settings import cliend_id
 from flask_socketio import SocketIO, emit
-import clasees
+import classes
 
 app = Flask(__name__)
 socketio = SocketIO(app)

@@ -5,7 +5,7 @@
 #################################################
 
 import sqlite3
-import clasees
+import classes
 
 
 #################################################
@@ -36,7 +36,7 @@ def contentsProcessing(threadId):
         entries.append(new)
     conn.close()
     return entries
-    
+
 
 
 #################################################
@@ -45,7 +45,7 @@ def contentsProcessing(threadId):
 ### Date :  2021.6.18
 ### Function: entry.idとentry.idからcontentを指定して
 ###　　　　　　"書込を更新する
-### Return : 
+### Return :
 #################################################
 
 #書込削除
@@ -67,7 +67,7 @@ def deleteContents(entry):
 ### Designer : 保科貴大
 ### Date :  2021.6.18
 ### Function: entry.auther,entry.content,threadをDBに登録する
-### Return : 
+### Return :
 #################################################
 
 #書込追加
