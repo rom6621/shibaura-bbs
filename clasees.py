@@ -42,7 +42,7 @@ class Thread:
 
     #スレッドを呼び出す際に、entriesに関連した書込みを配列に入れる関数
     def getEntry(self):
-        for i = 0 in lastEntryId
+        for i in range(self.lastEntryId)
             self.entries[i] =
 
     #新しい書き込みをthreadに関連したentry
