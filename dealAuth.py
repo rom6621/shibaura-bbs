@@ -27,26 +27,32 @@ def takingGoogleMailProcessing(token):
     jwksURI = 'https://www.googleapis.com/oauth2/v3/certs'
     googleIssuer = 'accounts.google.com'
     clientID = cliend_id
+
+    #受け取ったtokenからid_tokenを探すfor文
     for keyFirst in token :
         for keySecond in token[keyFirst] :
             if (keySecond == 'id_token') :
                 idToken = token[keyFirst][keySecond] #tokenの中にあるid_tokenの中身
+
     header = jwt.get_unverified_header(idToken) #id_tokenの中にあるheader
     res = requests.get(jwksURI).json() #JWKS_URI内にあるjsonファイルの中身
     jwk = next(filter(lambda k: k['kid'] == header['kid'], res['keys'])) #res内にあるデコードに必要な情報
     public_key = RSAAlgorithm.from_jwk(json.dumps(jwk)) #jwkを元にしたデコード用の鍵
+
     claims = jwt.decode(idToken,
                         public_key,
                         issuer=googleIssuer,
                         algorithms=['RS256'],
                         audience=clientID) #id_tokenのデコード用
-    #pprint(claims)
+
     gmailAddress = claims['email'] #Googleのメアド
     invaderCheck = gmailAddress.split('@') #外部のGoogleアカウントのチェック用
     userID = None #ユーザID、外部の場合はNoneのまま返る
+
     #芝浦のGoogleアカウントかどうかの確認、芝浦のものならば問い合わせを行う
     if (invaderCheck[1] == 'shibaura-it.ac.jp') :
         userID = questionGmailProcessing(gmailAddress)
+
     return userID
 
 #################################################
@@ -59,7 +65,11 @@ def takingGoogleMailProcessing(token):
 #################################################
 
 def questionGmailProcessing(gmailAddress):
+    #manageUsersに問い合わせ，データを受け取る．受け取るものはクラス
     userData = manageUsers.userRegistrationRequest(gmailAddress)
+
+    #必要なものはIDのみであるので，IDのみをクラスから抜き取る．
     userID = userData.id
     mailAddress = userData.mailAddress
+
     return userID
