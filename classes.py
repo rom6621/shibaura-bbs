@@ -56,7 +56,7 @@ class Thread:
         #引数から新しい書込を作る
         newEntry = self.addEntry(entryAuther, entryContent)
         #addEntryで作成されたnewEntryを用いて関数を呼び出す
-        manageEntry.addContents(newEntry, self.id)
+        addContents(newEntry, self.id)
 
     #書込みを削除する関数
     def deleteEntry(self, id):
@@ -105,3 +105,7 @@ def deleteEntry(entryId):
     newEntry = entry.exchangeContent()
     newThread = deleteContents(newEntry, self.id)
     return newThread
+
+def addContents(a):
+    s=0
+    
