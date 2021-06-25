@@ -33,9 +33,9 @@ def analyzeKeyword(line):
             searchWords.append(keyword)
 
     # 検索語句の配列とタグの配列をまとめる作業
-    search_keys = []
-    search_keys.append(searchWords)
-    search_keys.append(searchTags)
+    searchKeys = []
+    searchKeys.append(searchWords)
+    searchKeys.append(searchTags)
 
     # search_key[ [検索語句1,検索語句2,...], [タグ1,タグ2,....]]
-    return search_keys
+    return searchKeys
