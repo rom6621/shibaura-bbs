@@ -77,6 +77,3 @@ class User:
     def __init__(self, userId, userMailAddress):
         self.id = userId
         self.mailAddress = userMailAddress
-
-def addContents(a, b):
-    s=0
