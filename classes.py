@@ -37,9 +37,9 @@ class Thread:
     #引数から新しい書込を作る関数
     def addEntry(self, entryAuther, entryContent):
         self.lastEntryId += 1
-        new = Entry(self.lastEntryId, entryAuther, entryContent)
+        newEntry = Entry(self.lastEntryId, entryAuther, entryContent)
         #作った書込をThreadクラスに格納する
-        self.entries.append(new)
+        self.entries.append(newEntry)
         #addEntryで作成されたnewEntryを用いて関数を呼び出す
         manageEntry.addContents(newEntry, self.id)
 
