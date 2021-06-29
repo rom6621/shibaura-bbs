@@ -1,7 +1,7 @@
 #################################################
 # Designer :石川公彬
 # Date :2021.06.25
-# Purpose :
+# Purpose :スレッドの情報登録と検索処理を行う
 #################################################
 
 #################################################
@@ -20,18 +20,18 @@ import classes
 
 def threadRegistration(name, details):
 
-    conn = sqlite3.connect("test.db")
     # データベース作成
-    cur = conn.cursor()
+    conn = sqlite3.connect("test.db")
     # カーソルオブジェクトの作成
+    cur = conn.cursor()
 
+    # threadテーブルへスレッド名と詳細の登録
     sql = 'INSERT INTO Thread(name, details) VALUES("' + \
         name + '", "' + details + '")'
-    # threadテーブルへスレッド名と詳細の登録
     cur.execute(sql)
 
-    sql = 'SELECT id FROM Thread ORDER BY id DESC LIMIT 1'
     # スレッドIDを抽出
+    sql = 'SELECT id FROM Thread ORDER BY id DESC LIMIT 1'
     cur.execute(sql)
 
     newThreadId = cur.fetchone()
@@ -52,15 +52,16 @@ def threadRegistration(name, details):
 
 # スレッド情報取得
 
+
 def getThread(id):
 
-    conn = sqlite3.connect("test.db")
     # データベース作成
-    cur = conn.cursor()
+    conn = sqlite3.connect("test.db")
     # カーソルオブジェクトの作成
+    cur = conn.cursor()
 
-    sql = 'SELECT * FROM Thread WHERE id=' + str(id)
     # スレッドIDを抽出
+    sql = 'SELECT * FROM Thread WHERE id=' + str(id)
     cur.execute(sql)
 
     # threadにスレッドの情報を入れる
@@ -81,6 +82,8 @@ def getThread(id):
 #################################################
 
 # スレッド検索
+
+
 def search(searchKeys):
     searchWords = searchKeys[0]
     searchTags = searchKeys[1]
@@ -92,29 +95,30 @@ def search(searchKeys):
 
     sql = 'SELECT id FROM Thread'
 
+    # searchWordsとsearchTagsの要素数が0でなければif文に入る
     if (len(searchWords) != 0) or (len(searchTags) != 0):
-        # searchWordsとsearchTagsの要素数が0でなければif文に入る
         sql += ' WHERE'
+        # searchWordsの要素数が0でなければif文に入る
         if len(searchWords) != 0:
-            # searchWordsの要素数が0でなければif文に入る
             for searchWord in searchWords:
                 sql += (' name LIKE "%' + searchWord + '%" OR')
                 # searchWordをsql文に追加
+        # searchTagsの要素数が0でなければif文に入る
         if len(searchTags) != 0:
-            # searchTagsの要素数が0でなければif文に入る
             for searchTag in searchTags:
                 sql += (' tags LIKE "%' + searchTag + '%" OR')
                 # searchTagをsql文に追加
+         # 右からORを探して見つけたら削除
         sql = sql.rstrip(' OR')
-        # 右からORを探して見つけたら削除
+
     cur.execute(sql)
     results = cur.fetchall()
 
     for result in results:
         id = result[0]
         new = classes.Thread.getThread(id)
-        resultThreads.append(new)
         # resultThreadにnewThreadを追加
+        resultThreads.append(new)
 
     cur.close()
     conn.close()
