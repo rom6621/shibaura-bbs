@@ -12,6 +12,7 @@
 # Return : search_word,search_tag
 #################################################
 import classes
+import manageThread
 
 def analyzeKeyword(line):
 
@@ -25,17 +26,18 @@ def analyzeKeyword(line):
     # スペース文字で文字列を分解
     keywords = line.split(" ")
 
-    # 検索語句かタグかを判別
-    for keyword in keywords:
-        if(keyword[0] == "#"):
-            searchTags.append(keyword[1:])
-        else:
-            searchWords.append(keyword)
-
+    if keywords[0] != "":
+        # 検索語句かタグかを判別
+        for keyword in keywords:
+            if(keyword[0] == "#"):
+                searchTags.append(keyword[1:])
+            else:
+                searchWords.append(keyword)
+    
     # 検索語句の配列とタグの配列をまとめる作業
     searchKeys = []
     searchKeys.append(searchWords)
     searchKeys.append(searchTags)
 
     # search_key[ [検索語句1,検索語句2,...], [タグ1,タグ2,....]]
-    return searchKeys
+    return manageThread.search(searchKeys)

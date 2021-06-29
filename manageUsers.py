@@ -47,7 +47,7 @@ def userRegistrationRequest(mailAddress):
         #tableがまだ決まっていないのでrow[0](UseID)
         id = row[0][0]
 
-    tmpUser = clasees.User(id, mailAddress)
+    tmpUser = classes.User(id, mailAddress)
     conn.commit()
     conn.close()
     return tmpUser

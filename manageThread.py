@@ -13,6 +13,7 @@
 #################################################
 
 import sqlite3
+from threading import Thread
 import classes
 # スレッド情報登録
 
@@ -24,24 +25,52 @@ def threadRegistration(name, details):
     cur = conn.cursor()
     # カーソルオブジェクトの作成
 
-    sql = 'INSERT INTO Thread (name, details) values ("' + \
-        name + '","' + details + '")'
+    sql = 'INSERT INTO Thread(name, details) VALUES("' + \
+        name + '", "' + details + '")'
     # threadテーブルへスレッド名と詳細の登録
     cur.execute(sql)
 
-    sql = 'SELECT threadID FROM Thread ORDER BY threadID DESC LIMIT 1'
+    sql = 'SELECT id FROM Thread ORDER BY id DESC LIMIT 1'
     # スレッドIDを抽出
     cur.execute(sql)
 
-    threadId = cur.fetchall[0]
+    newThreadId = cur.fetchone()
+
+    cur.close()
+    conn.commit()
+    conn.close()
+
+    return newThreadId
+
+#################################################
+# Function Name :getThread
+# Designer :石川公彬
+# Date :2021.06.22
+# Function:スレッドIDからDBを検索し、スレッド情報を取得する
+# Return :newThread
+#################################################
+
+# スレッド情報取得
+
+def getThread(id):
+
+    conn = sqlite3.connect("test.db")
+    # データベース作成
+    cur = conn.cursor()
+    # カーソルオブジェクトの作成
+
+    sql = 'SELECT * FROM Thread WHERE id=' + str(id)
+    # スレッドIDを抽出
+    cur.execute(sql)
+
+    # threadにスレッドの情報を入れる
+    thread = cur.fetchone()
 
     cur.close()
     conn.close()
 
-    newThread = classes.Thread(threadId, name, details)
     # newThreadにスレッドの情報を入れる
-    return newThread
-
+    return thread
 
 #################################################
 # Function Name :search
@@ -61,7 +90,7 @@ def search(searchKeys):
     conn = sqlite3.connect("test.db")
     cur = conn.cursor()
 
-    sql = 'SELECT * FROM Thread'
+    sql = 'SELECT id FROM Thread'
 
     if (len(searchWords) != 0) or (len(searchTags) != 0):
         # searchWordsとsearchTagsの要素数が0でなければif文に入る
@@ -74,7 +103,7 @@ def search(searchKeys):
         if len(searchTags) != 0:
             # searchTagsの要素数が0でなければif文に入る
             for searchTag in searchTags:
-                sql += ('tags LIKE "%' + searchTag + '%" OR')
+                sql += (' tags LIKE "%' + searchTag + '%" OR')
                 # searchTagをsql文に追加
         sql = sql.rstrip(' OR')
         # 右からORを探して見つけたら削除
@@ -83,10 +112,8 @@ def search(searchKeys):
 
     for result in results:
         id = result[0]
-        name = result[1]
-        details = result[2]
-        newThread = classes.Thread(id, name, details)
-        resultThreads.append(newThread)
+        new = classes.Thread.getThread(id)
+        resultThreads.append(new)
         # resultThreadにnewThreadを追加
 
     cur.close()

@@ -18,7 +18,9 @@
 ### Return :
 #################################################
 
+import re
 import thread
+import manageThread
 import manageEntry
 
 class Thread:
@@ -28,13 +30,31 @@ class Thread:
     lastEntryId: int
     entries = []
 
-    def __init__(self, threadId, threadName, threadDetails):
+    def __init__(self, threadId, threadName, threadDetails, entries=[], lastId=0):
         self.id = threadId
         self.name = threadName
         self.details = threadDetails
-        self.lastEntryId = 0
+        self.entries = entries
+        self.lastEntryId = lastId
 
-    #引数から新しい書込を作る関数
+    def __str__(self):
+        return str(self.id)
+
+    # スレッドIDからスレッドクラスを取得する
+    @classmethod
+    def getThread(cls, threadId):
+        ret = manageThread.getThread(threadId)
+        threadName = ret[1]
+        threadDetails = ret[2]
+        entries = manageEntry.contentsProcessing(threadId)
+        return cls(threadId, threadName, threadDetails, entries, len(entries))
+
+    @classmethod
+    def createThread(cls, threadName, threadDetails):
+        threadId = manageThread.threadRegistration(threadName, threadDetails)
+        return cls(threadId, threadName, threadDetails)
+
+    #引数から新しい書込を作るメソッド
     def addEntry(self, entryAuthor, entryContent):
         self.lastEntryId += 1
         newEntry = Entry(self.lastEntryId, entryAuthor, entryContent)
@@ -42,19 +62,9 @@ class Thread:
         self.entries.append(newEntry)
         #addEntryで作成されたnewEntryを用いて関数を呼び出す
         manageEntry.addContents(newEntry, self.id)
+        return newEntry
 
-    #スレッドを呼び出す際に、entriesに関連した書込みを配列に入れる関数
-    def getEntry(self):
-        #new配列を初期化し、関数を呼び出し返り値をnew配列に代入していく
-        new = []
-        new = manageEntry.contentsProcessing(self.id)
-        #受け取った配列を、Threadクラスのentries配列に代入していく
-        for i in new:
-            self.entries.append(i)
-        #書込みの順番を更新する
-        self.lastEntryId = len(self.entries)
-
-    #書込みを削除する関数
+    #書込みを削除するメソッド
     def deleteEntry(self, id):
         #渡されたidの書込の内容を書き換える
         self.entries[id].content = '削除されました'

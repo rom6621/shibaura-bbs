@@ -25,12 +25,12 @@ def contentsProcessing(threadId):
     #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
     #Entryテーブルからcontentを抜き出す
-    c.execute('SELECT * FROM Entry WHERE threadId = ' +str(threadId)+ ' ORDER BY id ASC  ')
+    c.execute('SELECT id, auther, content FROM Entry WHERE threadId = ' +str(threadId)+ ' ORDER BY id ASC  ')
     results = c.fetchall()
     for result in results:
         id = result[0]
-        auther = result[2]
-        content = result[3]
+        auther = result[1]
+        content = result[2]
         new = classes.Entry(id,auther,content)
         entries.append(new)
     c.close()
@@ -77,7 +77,7 @@ def addContents(entry,threadId):
     #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
     #userID,threadID,contentをEntryテーブルに追加する
-    c.execute('INSERT INTO Entry(auther,threadID,content) VALUES("' +entry.auther+ '",' +str(threadId)+ ',"' +entry.content+ '")')
+    c.execute('INSERT INTO Entry(auther,threadID,content) VALUES("' +entry.author+ '",' +str(threadId)+ ',"' +entry.content+ '")')
     c.close()
     conn.commit()
     conn.close()

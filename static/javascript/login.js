@@ -1,5 +1,3 @@
-var socket = io.connect();
-
 (function(d) {
     var config = {
         kitId: 'rnp8urf',
@@ -10,6 +8,14 @@ var socket = io.connect();
 })(document);
 
 // ログイン
-function onSignIn(googleUser) {
-    socket.emit('checkToken', googleUser);
+function onSignIn(token) {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = "/login";
+    const input = document.createElement('input');
+    input.name = 'token';
+    input.value = JSON.stringify(token);
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
 }

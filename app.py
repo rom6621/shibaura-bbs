@@ -1,50 +1,68 @@
-from threading import Thread
-from flask import Flask, render_template, redirect, url_for, request
-from local_settings import cliend_id
+from flask import Flask, render_template, redirect, url_for, request, session
+from local_settings import cliend_id, secret_key
 from flask_socketio import SocketIO, emit
-import classes
+import json
+import classes, thread, dealAuth
 
 app = Flask(__name__)
+app.secret_key = secret_key
 socketio = SocketIO(app)
-
-###################テストデータ###################
-
-test1 = clasees.Thread(1, "テストスレッド1", "1つ目のスレッド")
-test2 = clasees.Thread(2, "テストスレッド2", "2つ目のスレッド")
-test3 = clasees.Thread(3, "テストスレッド2", "2つ目のスレッド")
-
-test1.addEntry('al19000', '1つめの書込')
-test1.addEntry('al19000', '2つめの書込')
-test1.addEntry('al19000', '3つめの書込')
-
-threads = [test1, test2, test3]
-
-#################################################
 
 @app.route('/')
 def index():
-    return render_template('threadList.html')
+    return redirect(url_for('login'))
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html', cliend_id=cliend_id)
+    if request.method == 'POST':
+        token = json.loads(request.form['token'])
+        userId = dealAuth.takingGoogleMailProcessing(token)
+        if userId != None:
+            session['userId'] = userId
+        return redirect(url_for('displayThreadList')) 
+    else:
+        if 'userId' in session:
+            return redirect(url_for('displayThreadList'))
+        else:
+            return render_template('login.html', cliend_id=cliend_id)
 
-@app.route('/makeThread')
+@app.route('/makeThread', methods=['GET', 'POST'])
 def makeThread():
-    return render_template('makeThread.html')
+    if 'userId' in session:
+        if request.method == 'POST':
+            name = request.form['name']
+            details = request.form['details']
+            thread = classes.Thread.createThread(name, details)
+            return redirect(url_for('displayThread', thread=thread.id))
+        else:
+            return render_template('makeThread.html')
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/thread')
 def displayThread():
-    return render_template('thread.html', thread=test1)
+    if 'userId' in session:
+        id = request.args.get('thread')
+        thread = classes.Thread.getThread(id)
+        return render_template('thread.html', thread=thread)
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/threadList')
 def displayThreadList():
-    return render_template('threadList.html', threads=threads)
+    if 'userId' in session:
+        threads = thread.analyzeKeyword("")
+        return render_template('threadList.html', threads=threads)
+    else:
+        return redirect(url_for('login'))
 
-@socketio.on('checkToken')
-def checkToken(token):
-    print(token)
-    return render_template('threadList.html')
+@socketio.on('write board')
+def writeBoard(args):
+    threadId = args['threadId']
+    content = args['content']
+    entry = classes.Thread.getThread(threadId).addEntry(session['userId'], content)
+    param = {'threadId': threadId, 'entryAuthor': entry.author, 'entryContent': entry.content}
+    socketio.emit('add entry', param)
 
 # 実行
 if __name__ == '__main__':

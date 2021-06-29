@@ -38,12 +38,12 @@
 
     <div class="container">
         <h1 class="mt-5">スレッド作成</h1>
-        <form action="" class="mt-4">
+        <form action="/makeThread" method="POST" class="mt-4">
             <div class="form-group mb-3">
                 <label class="my-3 fs-5" for="nameField">スレッド名</label>
-                <input type="text" class="form-control bordered" id="nameField" placeholder="スレッド名を入力">
+                <input name="name" type="text" class="form-control bordered" id="nameField" placeholder="スレッド名を入力">
             </div>
-            <div class="form-group mb-3">
+            <!-- <div class="form-group mb-3">
                 <label class="my-3 fs-5" for="tagField">タグ</label>
                 <div class="input-group">
                     <div class="input-group">
@@ -61,11 +61,12 @@
                         <button class="btn btn-outline-success rounded">追加</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group mb-3">
                 <label class="my-3 fs-5" for="detailField">スレッド詳細</label>
-                <textarea type="" class="form-control bordered" id="detailField" placeholder="詳細を入力"></textarea>
+                <textarea name="details" type="" class="form-control bordered" id="detailField" placeholder="詳細を入力"></textarea>
             </div>
+            <input type="submit" class="btn btn-primary">
         </form>
     </div>
 
