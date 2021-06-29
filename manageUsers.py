@@ -32,9 +32,10 @@ def userRegistrationRequest(mailAddress):
     if len(row) == 0 :
         #ユーザID作成処理
         id = mailAddress.split("@")[0]
+        name = "noName"
 
         #tableへの登録
-        sql = 'INSERT INTO User(id, mailAddress,name) values ("' + id + '", "' + mailAddress + '","noName )'
+        sql = 'INSERT INTO User(id, mailAddress,name) values ("' + id + '", "' + mailAddress + '","noName" )'
         cur.execute(sql)
 
 
@@ -60,21 +61,41 @@ def userRegistrationRequest(mailAddress):
 ### Designer : 鈴木一史
 ### Date : 2021.06.11
 ### Function: DBに利用者情報を問い合わせ、ユーザ名の更新を行う。
-### Return : User   クラス
+### Return : なし
 #################################################
 
-def userNameUpdate(uclass,nName):
-    id = uclass.id
-
+def userNameUpdate(id,nName):
     dbname = 'test.db' #データベース作成　or 参照
     conn = sqlite3.connect(dbname)
     # sqliteを操作するカーソルオブジェクトを作成
     cur = conn.cursor()
 
-    cur.execute('UPDATE User SET name = "' + nName + '" WHERE id = "' + id + '"')
-    uclass.name = nName
-
+    cur.execute('UPDATE User SET name="' + nName + '" WHERE id="' + id + '"')
+    print('UPDATE User SET name="' + nName + '" WHERE id="' + id + '"')
     cur.close()
     conn.commit()
     conn.close()
-    return uclass
+
+#################################################
+### Function Name : getUser
+### Designer : 鈴木一史
+### Date : 2021.06.11
+### Function: 指定されたidをもとにDBに利用者情報を問い合わせ、取得したユーザ情報を返す
+### Return : User   クラス
+#################################################
+
+def getUser(id):
+    dbname = 'test.db' #データベース作成　or 参照
+    conn = sqlite3.connect(dbname)
+    # sqliteを操作するカーソルオブジェクトを作成
+    cur = conn.cursor()
+    print('SELECT * FROM User WHERE id="' + id + '"')
+    cur.execute('SELECT * FROM User WHERE id="' + id + '"')
+    row = cur.fetchone()
+    #tableがまだ決まっていないのでrow[0](UseID)
+    mailAddress = row[1]
+    name = row[2]
+    cur.close()
+    conn.commit()
+    conn.close()
+    return mailAddress, name

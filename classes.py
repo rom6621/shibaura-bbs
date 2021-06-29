@@ -18,10 +18,10 @@
 ### Return :
 #################################################
 
-import re
 import thread
 import manageThread
 import manageEntry
+import manageUsers
 
 class Thread:
     id: int
@@ -72,7 +72,6 @@ class Thread:
 
 class Entry:
     id: int #書込の順番
-    author: str
     content: str
 
     def __init__(self, entryId, entryAuthor, entryContent):
@@ -83,7 +82,19 @@ class Entry:
 class User:
     id: str
     mailAddress: str
+    name: str
 
-    def __init__(self, userId, userMailAddress):
+    def __init__(self, userId, userMailAddress, userName):
         self.id = userId
         self.mailAddress = userMailAddress
+        self.name = userName
+
+    @classmethod
+    def getUser(cls, userId):
+        ret = manageUsers.getUser(userId)
+        mailAddress = ret[0]
+        userName = ret[1]
+        return cls(userId, mailAddress, userName)
+
+def updateName(userId, name):
+    manageUsers.userNameUpdate(userId, name)

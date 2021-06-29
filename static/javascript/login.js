@@ -18,4 +18,6 @@ function onSignIn(token) {
     form.appendChild(input);
     document.body.appendChild(form);
     form.submit();
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut();
 }

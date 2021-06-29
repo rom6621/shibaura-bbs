@@ -12,14 +12,14 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-4">
         <div class="container-fluid">
-            <a id="test" class="navbar-brand fs-2" href="#"><img src="../static/img/logo.png" alt="" width="170px"></a>
+            <a id="test" class="navbar-brand fs-2" href="{{ url_for('displayThreadList') }}"><img src="../static/img/logo.png" alt="" width="170px"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">マイページ</a>
+                        <a class="nav-link" href="{{ url_for('displayMypage') }}">マイページ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('displayThreadList') }}">スレッド一覧</a>
@@ -28,8 +28,8 @@
                         <a class="nav-link active" href="{{ url_for('makeThread') }}">スレッド作成</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-4" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex" action="/threadList" method="GET" class="mt-4">
+                    <input class="form-control me-4" name="search" type="search" placeholder="Search" aria-label="Search">
                     <button id="searchBtn" class="btn btn-outline-success me-5" type="submit">Search</button>
                 </form>
             </div>

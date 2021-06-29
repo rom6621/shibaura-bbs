@@ -1,6 +1,8 @@
+from os import name
+from manageUsers import userNameUpdate
 from flask import Flask, render_template, redirect, url_for, request, session
 from local_settings import cliend_id, secret_key
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO
 import json
 import classes, thread, dealAuth
 
@@ -16,15 +18,30 @@ def index():
 def login():
     if request.method == 'POST':
         token = json.loads(request.form['token'])
-        userId = dealAuth.takingGoogleMailProcessing(token)
-        if userId != None:
-            session['userId'] = userId
-        return redirect(url_for('displayThreadList')) 
+        user = dealAuth.takingGoogleMailProcessing(token)
+        if user != None:
+            session['userId'] = user.id
+            session['userName'] = user.name
+        return redirect(url_for('displayThreadList'))
     else:
         if 'userId' in session:
+            session.clear()
             return redirect(url_for('displayThreadList'))
         else:
             return render_template('login.html', cliend_id=cliend_id)
+
+@app.route('/mypage', methods=['GET', 'POST'])
+def displayMypage():
+    if 'userId' in session:
+        if request.method == 'POST':
+            userName = request.form['userName']
+            classes.updateName(session['userId'], userName)
+            session['userName'] = userName
+            return render_template('mypage.html')
+        else:
+            return render_template('mypage.html')
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/makeThread', methods=['GET', 'POST'])
 def makeThread():
@@ -39,7 +56,7 @@ def makeThread():
     else:
         return redirect(url_for('login'))
 
-@app.route('/thread')
+@app.route('/thread', methods=['GET'])
 def displayThread():
     if 'userId' in session:
         id = request.args.get('thread')
@@ -48,10 +65,15 @@ def displayThread():
     else:
         return redirect(url_for('login'))
 
-@app.route('/threadList')
+@app.route('/threadList', methods=['GET'])
 def displayThreadList():
     if 'userId' in session:
-        threads = thread.analyzeKeyword("")
+        if request.args.get('search'):
+            search = request.args.get('search')
+            threads = thread.analyzeKeyword(search)
+        else:
+            search = ""
+        threads = thread.analyzeKeyword(search)
         return render_template('threadList.html', threads=threads)
     else:
         return redirect(url_for('login'))
@@ -60,8 +82,8 @@ def displayThreadList():
 def writeBoard(args):
     threadId = args['threadId']
     content = args['content']
-    entry = classes.Thread.getThread(threadId).addEntry(session['userId'], content)
-    param = {'threadId': threadId, 'entryAuthor': entry.author, 'entryContent': entry.content}
+    entry = classes.Thread.getThread(threadId).addEntry(classes.User.getUser(session['userId']), content)
+    param = {'threadId': threadId, 'entryAuthor': entry.author.name, 'entryContent': entry.content}
     socketio.emit('add entry', param)
 
 # 実行

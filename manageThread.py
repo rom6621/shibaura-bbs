@@ -61,7 +61,7 @@ def getThread(id):
     cur = conn.cursor()
 
     # スレッドIDを抽出
-    sql = 'SELECT * FROM Thread WHERE id=' + str(id)
+    sql = 'SELECT * FROM Thread WHERE id="' + str(id) + '"'
     cur.execute(sql)
 
     # threadにスレッドの情報を入れる

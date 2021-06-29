@@ -51,6 +51,6 @@ def takingGoogleMailProcessing(token):
 
     #芝浦のGoogleアカウントかどうかの確認、芝浦のものならば問い合わせ&登録を行う
     if (invaderCheck[1] == 'shibaura-it.ac.jp') :
-        return userRegistrationRequest(mailAddress)
+        return manageUsers.userRegistrationRequest(gmailAddress)
     else :
         return None

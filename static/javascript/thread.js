@@ -13,6 +13,8 @@ writeBtn.addEventListener('click', function(event) {
     else {
         if(confirm("書き込みますか?")) {
             socket.emit('write board', {threadId: threadId, content: inputField.value});
+            console.log(("test"));
+            alert("a")
             inputField.value = '';    
         }    
     }
@@ -20,6 +22,9 @@ writeBtn.addEventListener('click', function(event) {
 
 socket.on('add entry', function(event) {
     if(threadId === event['threadId']) {
+        if(document.getElementById('noEntry') !== null) {
+            document.getElementById('noEntry').remove();
+        }
         var entryAuthor = event['entryAuthor'];
         var entryContent = event['entryContent'];
         var entries = document.getElementById('entries');
