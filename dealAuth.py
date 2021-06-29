@@ -19,7 +19,8 @@ import manageUsers
 ### Designer :浅瀬石 遊那
 ### Date :2021.06.11
 ### Function:受け取ったtokenからそのtokenのgoogleアカウントの
-###          メールアドレスを導き出す．
+###          メールアドレスを導き出し，芝浦のものの場合，利用者
+###          情報管理部に問い合わせ&登録を行う．
 ### Return :user_id     --ユーザID
 #################################################
 
@@ -48,7 +49,7 @@ def takingGoogleMailProcessing(token):
     gmailAddress = claims['email'] #Googleのメアド
     invaderCheck = gmailAddress.split('@') #外部のGoogleアカウントのチェック用
 
-    #芝浦のGoogleアカウントかどうかの確認、芝浦のものならば問い合わせを行う
+    #芝浦のGoogleアカウントかどうかの確認、芝浦のものならば問い合わせ&登録を行う
     if (invaderCheck[1] == 'shibaura-it.ac.jp') :
         return userRegistrationRequest(mailAddress)
     else :
