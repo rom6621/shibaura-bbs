@@ -3,6 +3,7 @@
 ### Date : 2021.06.11
 ### Purpose : DBに利用者情報を問い合わせ、登録済みであればUserIDとMailAddressを返し、
 ###            なければ、登録してUseIDとMailAddressを返す。
+###             また、ユーザ名の変更を行う
 #################################################
 
 #################################################
@@ -11,7 +12,7 @@
 ### Date : 2021.06.11
 ### Function: DBに利用者情報を問い合わせ、登録済みであればUserIDとMailAddressを返し、
 ###            なければ、登録してUseIDとMailAddressを返す。
-### Return : UserID,MailAddress
+### Return : Userクラス
 #################################################
 import sqlite3
 import classes
@@ -33,21 +34,47 @@ def userRegistrationRequest(mailAddress):
         id = mailAddress.split("@")[0]
 
         #tableへの登録
-        sql = 'INSERT INTO User(id, mailAddress) values ("' + id + '", "' + mailAddress + '" )'
+        sql = 'INSERT INTO User(id, mailAddress,name) values ("' + id + '", "' + mailAddress + '","noName )'
         cur.execute(sql)
 
 
     #DB内にあったとき
     else:
         #行を再取得
-        cur.execute('SELECT * FROM User WHERE mailAddress = "%s"' % mailAddress)
-        row = cur.fetchall()
+        cur.execute('SELECT id,name FROM User WHERE mailAddress = "%s"' % mailAddress)
+        row = cur.fetchone()
 
 
         #tableがまだ決まっていないのでrow[0](UseID)
-        id = row[0][0]
+        id = row[0]
+        name = row[1]
 
-    tmpUser = classes.User(id, mailAddress)
+    tmpUser = classes.User(id, mailAddress,name)
+    cur.close()
     conn.commit()
     conn.close()
     return tmpUser
+
+#################################################
+### Function Name : userNameUpdate
+### Designer : 鈴木一史
+### Date : 2021.06.11
+### Function: DBに利用者情報を問い合わせ、ユーザ名の更新を行う。
+### Return : User   クラス
+#################################################
+
+def userNameUpdate(uclass,nName):
+    id = uclass.id
+
+    dbname = 'test.db' #データベース作成　or 参照
+    conn = sqlite3.connect(dbname)
+    # sqliteを操作するカーソルオブジェクトを作成
+    cur = conn.cursor()
+
+    cur.execute('UPDATE User SET name = "' + nName + '" WHERE id = "' + id + '"')
+    uclass.name = nName
+
+    cur.close()
+    conn.commit()
+    conn.close()
+    return uclass
