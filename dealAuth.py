@@ -47,29 +47,9 @@ def takingGoogleMailProcessing(token):
 
     gmailAddress = claims['email'] #Googleのメアド
     invaderCheck = gmailAddress.split('@') #外部のGoogleアカウントのチェック用
-    userID = None #ユーザID、外部の場合はNoneのまま返る
 
     #芝浦のGoogleアカウントかどうかの確認、芝浦のものならば問い合わせを行う
     if (invaderCheck[1] == 'shibaura-it.ac.jp') :
-        userID = questionGmailProcessing(gmailAddress)
-
-    return userID
-
-#################################################
-### Function Name :questionGmailProcessing
-### Designer :浅瀬石 遊那
-### Date :2021.06.11
-### Function:受け取った学内のGmailアドレスを用い、
-###          利用者情報管理部に問い合わせを行う
-### Return :userID     --ユーザID
-#################################################
-
-def questionGmailProcessing(gmailAddress):
-    #manageUsersに問い合わせ，データを受け取る．受け取るものはクラス
-    userData = manageUsers.userRegistrationRequest(gmailAddress)
-
-    #必要なものはIDのみであるので，IDのみをクラスから抜き取る．
-    userID = userData.id
-    mailAddress = userData.mailAddress
-
-    return userID
+        return userRegistrationRequest(mailAddress)
+    else :
+        return None
