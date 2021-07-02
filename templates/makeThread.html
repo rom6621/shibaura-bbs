@@ -6,7 +6,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/css/style.css">
-    <script src="../static/javascript/script.js"></script>
 </head>
 <body>
 
@@ -38,7 +37,7 @@
 
     <div class="container">
         <h1 class="mt-5">スレッド作成</h1>
-        <form action="/makeThread" method="POST" class="mt-4">
+        <form action="/makeThread" method="POST" class="mt-4" onsubmit="checkThread()">
             <div class="form-group mb-3">
                 <label class="my-3 fs-5" for="nameField">スレッド名</label>
                 <input name="name" type="text" class="form-control bordered" id="nameField" placeholder="スレッド名を入力">
@@ -66,9 +65,9 @@
                 <label class="my-3 fs-5" for="detailField">スレッド詳細</label>
                 <textarea name="details" type="" class="form-control bordered" id="detailField" placeholder="詳細を入力"></textarea>
             </div>
-            <input type="submit" class="btn btn-primary">
+            <input type="submit" class="btn btn-primary" id ="submit" >
         </form>
     </div>
-
+    <script src="../static/javascript/makeThread.js"></script>
 </body>
 </html>

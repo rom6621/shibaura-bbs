@@ -93,3 +93,8 @@ textarea {
 #threadForm {
     background-color: #c5f3e6;
 }
+
+#inputLength1 {
+    margin-top: 8px;
+    margin-right: 5px;
+}

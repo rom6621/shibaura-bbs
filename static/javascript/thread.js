@@ -4,12 +4,13 @@ var socket = io.connect();
 const writeBtn = document.getElementById('writeBtn');
 const inputField = document.getElementById('inputField');
 const threadId = Number(window.location.search.substring(1).split('&')[0].split('=')[1])
+const inputLength1 = document.getElementById('inputLength1');
 
 var entries = document.getElementById('entries');
 entries.scrollTop = entries.scrollHeight;
 
 writeBtn.addEventListener('click', function(event) {
-    if(inputField.value.length < 0 ) alert('入力されていません');
+    if(inputField.value.length === 0 ) alert('入力されていません');
     else if(inputField.value.length > 128 ) alert('文字数オーバーです');
     else {
         if(confirm("書き込みますか?")) {
@@ -21,8 +22,14 @@ writeBtn.addEventListener('click', function(event) {
     }
 })
 
-function ShowLength( str, resultid ) {
-   document.getElementById(resultid).innerHTML = str.length + "文字";
+function ShowLength() {
+   inputLength1.innerText =("00" + String(inputField.value.length)).slice(-3) + "/128";
+   if(inputField.value.length > 128){
+       inputLength1.style.color = "red";
+   }
+   else if(inputField.value.length <= 128){
+    inputLength1.style.color = "black";
+   }
 }
 
 socket.on('add entry', function(event) {
