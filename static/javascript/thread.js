@@ -17,6 +17,7 @@ writeBtn.addEventListener('click', function(event) {
             socket.emit('write board', {threadId: threadId, content: inputField.value});
             console.log(("test"));
             inputField.value = '';
+            inputLength1.innerText = "000/128"
         }
     }
 })
