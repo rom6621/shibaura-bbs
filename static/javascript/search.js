@@ -16,11 +16,11 @@ function checkSearch() {
     return submitFlg; 
 }
 function showLength3() {
-    inputSearchLength.innerText =("00" + String(nameField.value.length)).slice(-3) + "/128";
+    inputSearchLength.innerText =("00" + String(searchInput.value.length)).slice(-3) + "/128";
     if(searchInput.value.length > 128){
         inputSearchLength.style.color = "red";
     }
     else if(searchInput.value.length <= 128){
-     inputSearchLength.style.color = "black";
+     inputSearchLength.style.color = "white";
     }
  }

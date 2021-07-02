@@ -28,9 +28,10 @@
                         <a class="nav-link" href="{{ url_for('makeThread') }}">スレッド作成</a>
                     </li>
                 </ul>
-                <form class="d-flex" action="/threadList" method="GET" class="mt-4">
-                    <input class="form-control me-4" name="search" type="search" placeholder="Search" aria-label="Search">
-                    <button id="searchBtn" class="btn btn-outline-success me-5" type="submit">Search</button>
+                <form class="d-flex" action="/threadList" method="GET" class="mt-4" onsubmit="return checkSearch()">
+                    <input class="form-control me-4" name="search" type="search" placeholder="Search" aria-label="Search" id="searchInput" onkeyup="showLength3()">
+                    <p id="inputSearchLength">000/128</p>
+                    <input id="searchBtn" class="btn btn-outline-success me-5" type="submit" value="search">
                 </form>
             </div>
         </div>
@@ -38,7 +39,7 @@
 
     <div class="container">
         <h1 class="mt-5">マイページ</h1>
-        <form action="/mypage" method="POST" class="mt-4">
+        <form action="/mypage" method="POST" class="mt-4" onsubmit="return checkName()" autocomplete="off">
             <div class="form-group mb-3">
                 <label class="my-3 fs-5" for="name">ユーザID</label>
                 <p>{{ session['userId'] }}</p>
@@ -46,11 +47,13 @@
             <div class="form-group mb-3">
                 <label class="my-3 fs-5" for="userName">ユーザ名</label>
                 <p>現在の名前: {{ session['userName'] }}</p>
-                <input name="userName" type="text" class="form-control bordered" id="userName" placeholder="ユーザ名を入力"></input>
+                <input name="userName" type="text" class="form-control bordered" id="userName" placeholder="ユーザ名を入力" onkeyup="showLength4()"></input>
+                <p id="inputNameLength">00/10</p>
             </div>
-            <input type="submit" class="btn btn-primary">
+            <input type="submit" id="nameBtn" class="btn btn-primary">
         </form>
     </div>
-
+    <script src="../static/javascript/search.js"></script>
+    <script src="../static/javascript/mypage.js"></script>
 </body>
 </html>
