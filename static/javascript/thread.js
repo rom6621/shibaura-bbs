@@ -9,16 +9,21 @@ var entries = document.getElementById('entries');
 entries.scrollTop = entries.scrollHeight;
 
 writeBtn.addEventListener('click', function(event) {
-    if(inputField.value === '') alert('入力されていません');
+    if(inputField.value.length < 0 ) alert('入力されていません');
+    else if(inputField.value.length > 128 ) alert('文字数オーバーです');
     else {
         if(confirm("書き込みますか?")) {
             socket.emit('write board', {threadId: threadId, content: inputField.value});
             console.log(("test"));
             alert("a")
-            inputField.value = '';    
-        }    
+            inputField.value = '';
+        }
     }
 })
+
+function ShowLength( str, resultid ) {
+   document.getElementById(resultid).innerHTML = str.length + "文字";
+}
 
 socket.on('add entry', function(event) {
     if(threadId === event['threadId']) {
