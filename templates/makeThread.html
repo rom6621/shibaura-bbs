@@ -27,9 +27,10 @@
                         <a class="nav-link active" href="{{ url_for('makeThread') }}">スレッド作成</a>
                     </li>
                 </ul>
-                <form class="d-flex" action="/threadList" method="GET" class="mt-4">
-                    <input class="form-control me-4" name="search" type="search" placeholder="Search" aria-label="Search">
-                    <button id="searchBtn" class="btn btn-outline-success me-5" type="submit">Search</button>
+                <form class="d-flex" action="/threadList" method="GET" class="mt-4" onsubmit="return checkSearch()">
+                    <input class="form-control me-4" name="search" type="search" placeholder="Search" aria-label="Search" id="searchInput" onkeyup="showLength3()">
+                    <p id="inputSearchLength">000/128</p>
+                    <input id="searchBtn" class="btn btn-outline-success me-5" type="submit" value="search">
                 </form>
             </div>
         </div>
@@ -71,5 +72,6 @@
         </form>
     </div>
     <script src="../static/javascript/makeThread.js"></script>
+    <script src="../static/javascript/search.js"></script>
 </body>
 </html>
