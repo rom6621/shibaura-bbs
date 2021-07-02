@@ -16,7 +16,6 @@ writeBtn.addEventListener('click', function(event) {
         if(confirm("書き込みますか?")) {
             socket.emit('write board', {threadId: threadId, content: inputField.value});
             console.log(("test"));
-            alert("a")
             inputField.value = '';
         }
     }
