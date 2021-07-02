@@ -22,7 +22,7 @@ writeBtn.addEventListener('click', function(event) {
     }
 })
 
-function ShowLength() {
+function showLength() {
    inputLength1.innerText =("00" + String(inputField.value.length)).slice(-3) + "/128";
    if(inputField.value.length > 128){
        inputLength1.style.color = "red";
