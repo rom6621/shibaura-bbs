@@ -36,10 +36,10 @@ function showLength1() {
  }
  function showLength2() {
     inputThreadLength2.innerText =("000" + String(detailField.value.length)).slice(-4) + "/1024";
-    if(nameField.value.length > 1024){
+    if(detailField.value.length > 1024){
         inputThreadLength2.style.color = "red";
     }
-    else if(nameField.value.length <= 1024){
+    else if(detailField.value.length <= 1024){
      inputThreadLength2.style.color = "black";
     }
  }
