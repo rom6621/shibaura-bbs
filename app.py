@@ -86,6 +86,14 @@ def writeBoard(args):
     param = {'threadId': threadId, 'entryAuthor': entry.author.name, 'entryContent': entry.content}
     socketio.emit('add entry', param)
 
+@socketio.on('delete entry')
+def deleteEntry(args):
+    threadId = args['threadId']
+    entryId = args['entryId']
+    classes.Thread.getThread(threadId).deleteEntry(int(entryId))
+    param = {'threadId': threadId, 'entryId': entryId}
+    socketio.emit('update entry', param)
+
 # 実行
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5000)

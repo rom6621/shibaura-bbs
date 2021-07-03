@@ -18,8 +18,7 @@ function showLength4() {
     inputNameLength.innerText =("0" + String(userName.value.length)).slice(-2) + "/10";
     if(userName.value.length > 10){
         inputNameLength.style.color = "red";
-    }
-    else if(userName.value.length <= 10){
-     inputNameLength.style.color = "black";
+    } else if(userName.value.length <= 10){
+     inputNameLength.style.color = "#0b4e3c";
     }
  }

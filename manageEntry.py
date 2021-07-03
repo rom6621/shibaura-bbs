@@ -56,7 +56,8 @@ def deleteContents(entry, threadId):
     #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
     #contentを更新する
-    c.execute('UPDATE Entry SET content = "' +entry.content+ '" WHERE threadId = "' + threadId + '" AND id =' +str(entry.id)+ '" auther=""')
+    print('UPDATE Entry SET content="' + entry.content + '" WHERE threadId="' + str(threadId) + '" AND id=' + str(entry.id) + '"')
+    c.execute('UPDATE Entry SET content="' + entry.content + '" WHERE threadId="' + str(threadId) + '" AND id="' + str(entry.id) + '"')
     c.close()
     conn.commit()
     conn.close()

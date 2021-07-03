@@ -2,6 +2,7 @@ var socket = io.connect();
 
 // 投稿ボタンが押された時の処理
 const writeBtn = document.getElementById('writeBtn');
+const deleteBtn = document.getElementById('deleteBtn');
 const inputField = document.getElementById('inputField');
 const threadId = Number(window.location.search.substring(1).split('&')[0].split('=')[1])
 const inputLength1 = document.getElementById('inputLength1');
@@ -22,13 +23,19 @@ writeBtn.addEventListener('click', function(event) {
     }
 })
 
+deleteBtn.addEventListener('click', function(event) {
+    if(confirm("書き込みますか?")) {
+        socket.emit('delete entry', {threadId: threadId, entryId: this.value});
+        document.getElementById("contents-" + String(this.value)).innerText = "削除されました";
+    }
+})
+
 function showLength() {
    inputLength1.innerText =("00" + String(inputField.value.length)).slice(-3) + "/128";
    if(inputField.value.length > 128){
-       inputLength1.style.color = "red";
-   }
-   else if(inputField.value.length <= 128){
-    inputLength1.style.color = "black";
+    inputLength1.style.color = "red";
+   } else if(inputField.value.length <= 128){
+    inputLength1.style.color = "#0b4e3c";
    }
 }
 
@@ -47,5 +54,11 @@ socket.on('add entry', function(event) {
         <p class="px-3 pb-3">${entryContent}</p>`
         entries.appendChild(div);
         entries.scrollTop = entries.scrollHeight;
+    }
+})
+
+socket.on('update entry', function(event) {
+    if(threadId === event['threadId']) {
+        document.getElementById("contents-" + String(this.value)).innerText = "削除されました";
     }
 })

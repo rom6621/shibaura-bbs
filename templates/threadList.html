@@ -29,8 +29,8 @@
                     </li>
                 </ul>
                 <form class="d-flex" action="/threadList" method="GET" class="mt-4" onsubmit="return checkSearch()">
-                    <input class="form-control me-4" name="search" type="search" placeholder="Search" aria-label="Search" id="searchInput" onkeyup="showLength3()">
-                    <p id="inputSearchLength">000/128</p>
+                    <input class="form-control" name="search" type="search" placeholder="Search" aria-label="Search" id="searchInput" onkeyup="showLength3()">
+                    <p id="inputSearchLength" class="my-0 mx-2 align-self-center text-white">000/128</p>
                     <input id="searchBtn" class="btn btn-outline-success me-5" type="submit" value="search">
                 </form>
             </div>
@@ -45,7 +45,6 @@
             <a href="{{ url_for('displayThread', thread=thread) }}" class="list-group-item list-group-item-action">
                 <h3 class="px-3 py-2">{{ thread.name }}</h3>
                 <h5 class="px-3 py-2">{{ thread.details }}</h3>
-                <!-- <p class="px-3">#1年 #情報工学科</p> -->
             </a>
             {% endfor %}
             {% else %}

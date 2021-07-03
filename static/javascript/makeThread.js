@@ -29,17 +29,15 @@ function showLength1() {
     inputThreadLength1.innerText =("00" + String(nameField.value.length)).slice(-3) + "/128";
     if(nameField.value.length > 128){
         inputThreadLength1.style.color = "red";
-    }
-    else if(nameField.value.length <= 128){
-     inputThreadLength1.style.color = "black";
+    } else if(nameField.value.length <= 128){
+     inputThreadLength1.style.color = "#0b4e3c";
     }
  }
  function showLength2() {
     inputThreadLength2.innerText =("000" + String(detailField.value.length)).slice(-4) + "/1024";
     if(detailField.value.length > 1024){
         inputThreadLength2.style.color = "red";
-    }
-    else if(detailField.value.length <= 1024){
-     inputThreadLength2.style.color = "black";
+    } else if(detailField.value.length <= 1024){
+     inputThreadLength2.style.color = "#0b4e3c";
     }
  }

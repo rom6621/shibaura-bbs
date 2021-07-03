@@ -67,8 +67,8 @@ class Thread:
     #書込みを削除するメソッド
     def deleteEntry(self, id):
         #渡されたidの書込の内容を書き換える
-        self.entries[id].content = '削除されました'
-        manageEntry.deleteContents(self.entries[id], self.id)
+        self.entries[id-1].content = '削除されました'
+        manageEntry.deleteContents(self.entries[id-1], self.id)
 
 class Entry:
     id: int #書込の順番

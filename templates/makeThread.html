@@ -28,8 +28,8 @@
                     </li>
                 </ul>
                 <form class="d-flex" action="/threadList" method="GET" class="mt-4" onsubmit="return checkSearch()">
-                    <input class="form-control me-4" name="search" type="search" placeholder="Search" aria-label="Search" id="searchInput" onkeyup="showLength3()">
-                    <p id="inputSearchLength">000/128</p>
+                    <input class="form-control" name="search" type="search" placeholder="Search" aria-label="Search" id="searchInput" onkeyup="showLength3()">
+                    <p id="inputSearchLength" class="my-0 mx-2 align-self-center text-white">000/128</p>
                     <input id="searchBtn" class="btn btn-outline-success me-5" type="submit" value="search">
                 </form>
             </div>
@@ -44,25 +44,6 @@
                 <input name="name" type="text" class="form-control bordered" id="nameField" onkeyup="showLength1()" placeholder="スレッド名を入力">
                 <p id="inputThreadLength1">000/128</p>
             </div>
-            <!-- <div class="form-group mb-3">
-                <label class="my-3 fs-5" for="tagField">タグ</label>
-                <div class="input-group">
-                    <div class="input-group">
-                        <div class="bg-white rounded p-1 me-2 bordered" id="tagList">
-                            <button class="btn btn-sm btn-primary me-1">情報工学科</button>
-                            <button class="btn btn-sm btn-primary me-1">1年</button>
-                            <button class="btn btn-sm btn-primary me-1">豊洲</button>
-                        </div>
-                        <select class="form-select rounded me-2 bordered" name="" id="">
-                            <option selected>選択してください</option>
-                            <option>情報工学科</option>
-                            <option>1年</option>
-                            <option>豊洲</option>
-                        </select>
-                        <button class="btn btn-outline-success rounded">追加</button>
-                    </div>
-                </div>
-            </div> -->
             <div class="form-group mb-3">
                 <label class="my-3 fs-5" for="detailField">スレッド詳細</label>
                 <textarea name="details" type="" class="form-control bordered" id="detailField" onkeyup="showLength2()" placeholder="詳細を入力"></textarea>
