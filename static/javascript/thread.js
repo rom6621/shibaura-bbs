@@ -46,12 +46,14 @@ socket.on('add entry', function(event) {
         }
         var entryAuthor = event['entryAuthor'];
         var entryContent = event['entryContent'];
+        var entryId = event['entryId'];
         var entries = document.getElementById('entries');
         var div = document.createElement('div');
         div.id = "entry";
-        div.classList.add('rounded', 'bg-light', 'me-3');
-        div.innerHTML = `<p class="px-3 pt-3">${entryAuthor}</p>
-        <p class="px-3 pb-3">${entryContent}</p>`
+        div.classList.add('rounded', 'bg-warning', 'me-3');
+        div.innerHTML = `<div class="float-end"><button class="btn btn-danger" id="deleteBtn" value="${entryId}">削除</button></div>
+        <p class="px-3 pt-3" id="author-${entryId}">${entryId}. ${entryAuthor}</p>
+        <p class="px-3 pb-3" id="contents-${entryId}">${entryContent}</p>`
         entries.appendChild(div);
         entries.scrollTop = entries.scrollHeight;
     }
