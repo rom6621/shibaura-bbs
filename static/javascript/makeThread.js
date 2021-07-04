@@ -26,7 +26,7 @@ function checkThread() {
     return submitFlg; 
 }
 function showLength1() {
-    inputThreadLength1.innerText =("0" + String(nameField.value.length)).slice(-3) + "/32";
+    inputThreadLength1.innerText =("0" + String(nameField.value.length)).slice(-2) + "/32";
     if(nameField.value.length > 32){
         inputThreadLength1.style.color = "red";
     } else if(nameField.value.length <= 32){
