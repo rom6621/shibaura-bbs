@@ -83,7 +83,7 @@ def writeBoard(args):
     threadId = args['threadId']
     content = args['content']
     entry = classes.Thread.getThread(threadId).addEntry(classes.User.getUser(session['userId']), content)
-    param = {'threadId': threadId, 'entryId': entry.id, 'entryAuthor': entry.author.name, 'entryContent': entry.content}
+    param = {'threadId': threadId, 'entryId': entry.id, 'entryAuthor': entry.author.name, 'authorId': entry.author.id, 'entryContent': entry.content}
     socketio.emit('add entry', param)
 
 @socketio.on('delete entry')

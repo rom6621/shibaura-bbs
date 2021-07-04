@@ -36,7 +36,7 @@
     </nav>
 
     <div class="container">
-
+        <div id="userId" class="d-none">{{ session['userId'] }}</div>
         <div class="mt-4 rounded" id="threadDetails">
             <h1 class="p-3">{{ thread.name }}</h1>
             <p class="ps-5">{{ thread.details }}</p>
@@ -49,10 +49,10 @@
                   <div class="rounded me-3 {% if session['userId']==entry.author.id %} bg-warning {% else %} bg-light {% endif %}" id="entry">
                     {% if session['userId']==entry.author.id %}
                     <div class="float-end">
-                        <button class="btn btn-danger" id="deleteBtn" value="{{ entry.id }}">削除</button>
+                        <button class="btn btn-danger" id="deleteBtn" value="{{ entry.id }}" onclick="deleteEntry(this)">削除</button>
                     </div>
                     {% endif %}
-                    <p class="px-3 pt-3" id="author-{{ entry.id }}">{{ entry.id }}.  {{ entry.author.name }}</p>
+                    <p class="px-3 pt-3" id="author-{{ entry.id }}">{{ entry.author.name }}</p>
                     <p class="px-3 pb-3" id="contents-{{ entry.id }}">{{ entry.content }}</p>
                   </div>
                 {% endfor %}
