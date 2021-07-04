@@ -18,6 +18,7 @@ function checkSearch() {
 function showLength3() {
     inputSearchLength.innerText =("00" + String(searchInput.value.length)).slice(-3) + "/128";
     if(searchInput.value.length > 128){
+        inputSearchLength.classList.remove("text-white");
         inputSearchLength.style.color = "red";
     } else if(searchInput.value.length <= 128){
      inputSearchLength.style.color = "white";
