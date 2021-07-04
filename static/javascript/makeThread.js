@@ -11,7 +11,7 @@ function checkThread() {
         alert('スレッド名が入力されていません'); 
         submitFlg = false;
     }
-    else if(nameField.value.length > 128 ){
+    else if(nameField.value.length > 32 ){
         alert('スレッド名が文字数オーバーです');
         submitFlg = false;
     }
@@ -26,10 +26,10 @@ function checkThread() {
     return submitFlg; 
 }
 function showLength1() {
-    inputThreadLength1.innerText =("00" + String(nameField.value.length)).slice(-3) + "/128";
-    if(nameField.value.length > 128){
+    inputThreadLength1.innerText =("0" + String(nameField.value.length)).slice(-3) + "/32";
+    if(nameField.value.length > 32){
         inputThreadLength1.style.color = "red";
-    } else if(nameField.value.length <= 128){
+    } else if(nameField.value.length <= 32){
      inputThreadLength1.style.color = "#0b4e3c";
     }
  }

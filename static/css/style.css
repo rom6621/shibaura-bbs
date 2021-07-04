@@ -35,7 +35,7 @@ textarea {
 
 #threadDetails {
     background-color: #c5f3e6;
-    height: 200px;
+    min-height: 200px;
 }
 
 #threadBord {
