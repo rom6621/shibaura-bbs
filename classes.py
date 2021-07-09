@@ -1,5 +1,5 @@
 #################################################
-### Designer :開米大輝
+### Designer :開米大輝・浅瀬石遊那
 ### Date :2021.06.13
 ### Purpose :C1 UI処理部からの操作によって、書き込みを追加または削除するようC7 書込情報管理部を呼び出す。
 #################################################
@@ -7,8 +7,7 @@
 ### Revision :
 ### V1.0 : 開米, 2021.06.13
 ### V1.1 : 開米, 2021.06.15 writeEntry, deleteEntry
-### V1.2 : 修正者名, yyyy.mm.dd 改訂モジュール名を書く
-### V1.3 : 修正者名, yyyy.mm.dd 改訂モジュール名を書く
+### V1.2 : 浅瀬石, 2021.06.25 ユーザ取得処理，ネーム更新処理 追加
 
 #################################################
 ### Function Name :dealEntry
@@ -89,12 +88,30 @@ class User:
         self.mailAddress = userMailAddress
         self.name = userName
 
+#################################################
+### Function Name :getUser
+### Designer :浅瀬石 遊那
+### Date :2021.06.25
+### Function:ユーザIDに結び付いたメールアドレスとユーザネームを呼び出す処理．
+### Return :userId-利用者のユーザID
+###         userMailAddress-利用者のメールアドレス
+###         userName-利用者のユーザネーム
+#################################################
+
     @classmethod
     def getUser(cls, userId):
         ret = manageUsers.getUser(userId)
         mailAddress = ret[0]
         userName = ret[1]
         return cls(userId, mailAddress, userName)
+
+#################################################
+### Function Name :updateName
+### Designer :浅瀬石 遊那
+### Date :2021.06.25
+### Function:ユーザネームを更新する関数を呼び出す処理．
+### Return :なし
+#################################################
 
 def updateName(userId, name):
     manageUsers.userNameUpdate(userId, name)

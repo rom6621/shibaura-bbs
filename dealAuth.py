@@ -28,7 +28,9 @@ import manageUsers
 ### Function:受け取ったtokenからそのtokenのgoogleアカウントの
 ###          メールアドレスを導き出し，芝浦のものの場合，利用者
 ###          情報管理部に問い合わせ&登録を行う．
-### Return :user_id     --ユーザID
+### Return :userId-利用者のユーザID
+###         userMailAddress-利用者のメールアドレス
+###         userName-利用者のユーザネーム
 #################################################
 
 def takingGoogleMailProcessing(token):
