@@ -22,5 +22,10 @@
     </div>
 
 <script src="../static/javascript/login.js"></script>
+{% if login == False %}
+<script>
+    alert('アカウントが芝浦のものではありません')
+</script>
+{% endif %}
 </body>
 </html>
