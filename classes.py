@@ -6,8 +6,9 @@
 
 ### Revision :
 ### V1.0 : 開米, 2021.06.13
-### V1.1 : 開米, 2021.06.15 addEntry, deleteEntry
+### V1.1 : 開米, 2021.06.15 addEntry, deleteEntry追加
 ### V1.2 : 浅瀬石, 2021.06.25 ユーザ取得処理，ネーム更新処理 追加
+### V1.3 : 開米, 2021.06.25 getThread, createThread追加
 
 
 import thread
