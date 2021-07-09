@@ -1,7 +1,7 @@
 
 #################################################
 ### File Name : dealAuth.py
-### Version : V1.4
+### Version : V1.2
 ### Designer : 鈴木 一史
 ### Date : 2021.06.11
 ### Purpose : DBに利用者情報を問い合わせ、登録済みであればUserIDとMailAddressを返し、
