@@ -6,16 +6,9 @@
 
 ### Revision :
 ### V1.0 : 開米, 2021.06.13
-### V1.1 : 開米, 2021.06.15 writeEntry, deleteEntry
+### V1.1 : 開米, 2021.06.15 addEntry, deleteEntry
 ### V1.2 : 浅瀬石, 2021.06.25 ユーザ取得処理，ネーム更新処理 追加
 
-#################################################
-### Function Name :dealEntry
-### Designer :開米大輝
-### Date :2021.06.13
-### Function:UI処理部からの操作によって、書き込みを追加または削除するようC7 書込情報管理部を呼び出す。
-### Return :
-#################################################
 
 import thread
 import manageThread
@@ -39,7 +32,18 @@ class Thread:
     def __str__(self):
         return str(self.id)
 
-    # スレッドIDからスレッドクラスを取得する
+#################################################
+### Function Name :getThread
+### Designer :開米 大輝
+### Date :2021.06.25
+### Function:スレッドIDに紐づいたスレッド名とスレッド詳細と書込みを呼び出す処理
+### Return :threadId-スレッドのID
+###         threadName-スレッド名
+###         threadDetails-スレッド詳細
+###         entries-書込み
+###         len(entries)-スレッドの書込数
+#################################################
+
     @classmethod
     def getThread(cls, threadId):
         ret = manageThread.getThread(threadId)
@@ -48,12 +52,31 @@ class Thread:
         entries = manageEntry.contentsProcessing(threadId)
         return cls(threadId, threadName, threadDetails, entries, len(entries))
 
+#################################################
+### Function Name :createThread
+### Designer :開米 大輝
+### Date :2021.06.25
+### Function:渡されたスレッド名と詳細から新しいスレッドを作成する処理
+### Return :threadId-スレッドのID
+###         threadName-スレッド名
+###         threadDetails-スレッド詳細
+#################################################
+
     @classmethod
     def createThread(cls, threadName, threadDetails):
         threadId = manageThread.threadRegistration(threadName, threadDetails)
         return cls(threadId, threadName, threadDetails)
 
-    #引数から新しい書込を作るメソッド
+#################################################
+### Function Name :addEntry
+### Designer :開米 大輝
+### Date :2021.06.15
+### Function:渡されたユーザ名と書込内容から新しいスレッドを作成する処理
+### Return :lastEntryId-書込数
+###         entryAuthor-利用者のユーザ名
+###         entryContent-書込内容
+#################################################
+
     def addEntry(self, entryAuthor, entryContent):
         self.lastEntryId += 1
         newEntry = Entry(self.lastEntryId, entryAuthor, entryContent)
@@ -63,7 +86,14 @@ class Thread:
         manageEntry.addContents(newEntry, self.id)
         return newEntry
 
-    #書込みを削除するメソッド
+#################################################
+### Function Name :deleteEntry
+### Designer :開米 大輝
+### Date :2021.06.15
+### Function:IDに紐づいた書込みの内容を書き換える処理
+### Return : なし
+#################################################
+
     def deleteEntry(self, entryId):
         #渡されたidの書込の内容を書き換える
         self.entries[id-1].content = '削除されました'
