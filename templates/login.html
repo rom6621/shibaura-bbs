@@ -1,3 +1,9 @@
+<!-- #################################################
+### Designer : 浅瀬石 遊那
+### Date :2021.06.01
+### Purpose : M1 ログイン画面処理
+################################################# -->
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -21,11 +27,39 @@
     <div>
     </div>
 
-<script src="../static/javascript/login.js"></script>
+<script>
+// Google APIの設置
+(function(d) {
+    var config = {
+        kitId: 'rnp8urf',
+        scriptTimeout: 3000,
+        async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+})(document);
+
+// ログインするときの処理
+function onSignIn(token) {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = "/login";
+    const input = document.createElement('input');
+    input.name = 'token';
+    input.value = JSON.stringify(token);
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut();
+}
+</script>
+
+<!-- 芝浦のアカウントでなかったときの処理 -->
 {% if login == False %}
 <script>
     alert('アカウントが芝浦のものではありません')
 </script>
 {% endif %}
+
 </body>
 </html>

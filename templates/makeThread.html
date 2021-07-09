@@ -1,3 +1,9 @@
+<!-- #################################################
+### Designer : 佐藤 直輝
+### Date :2021.06.13
+### Purpose : M2 スレッド作成画面処理
+################################################# -->
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -52,7 +58,58 @@
             <input type="submit" class="btn btn-primary" id ="submit" >
         </form>
     </div>
-    <script src="../static/javascript/makeThread.js"></script>
-    <script src="../static/javascript/search.js"></script>
+<!-- ナビゲーションバーのJS -->
+<script src="../static/javascript/search.js"></script>
+
+<script>
+const submit = document.getElementById('submit'); // 提出ボタン
+const nameField = document.getElementById('nameField'); // スレッド名
+const detailField = document.getElementById('detailField'); // スレッド詳細
+const inputThreadLength1 = document.getElementById('inputThreadLength1'); // スレッド名のバリデーション
+const inputThreadLength2 = document.getElementById('inputThreadLength2'); // スレッド詳細のバリデーション
+
+// スレッドのバリデーションを行う
+function checkThread() {
+    let submitFlg = true;
+    if(nameField.value.length === 0 ){ 
+        alert('スレッド名が入力されていません'); 
+        submitFlg = false;
+    }
+    else if(nameField.value.length > 32 ){
+        alert('スレッド名が文字数オーバーです');
+        submitFlg = false;
+    }
+    if(detailField.value.length === 0 ){ 
+        alert('スレッド内容が入力されていません');
+        submitFlg =  false;
+    }
+    else if(detailField.value.length > 1024 ){ 
+        alert('スレッド内容が文字数オーバーです');
+        submitFlg = false;
+    } 
+    return submitFlg; 
+}
+
+// スレッド名のバリデーションの処理
+function showLength1() {
+    inputThreadLength1.innerText =("0" + String(nameField.value.length)).slice(-2) + "/32";
+    if(nameField.value.length > 32){
+        inputThreadLength1.style.color = "red";
+    } else if(nameField.value.length <= 32){
+     inputThreadLength1.style.color = "#0b4e3c";
+    }
+ }
+
+ // スレッド詳細のバリデーションの処理
+ function showLength2() {
+    inputThreadLength2.innerText =("000" + String(detailField.value.length)).slice(-4) + "/1024";
+    if(detailField.value.length > 1024){
+        inputThreadLength2.style.color = "red";
+    } else if(detailField.value.length <= 1024){
+     inputThreadLength2.style.color = "#0b4e3c";
+    }
+ }    
+</script>
+
 </body>
 </html>
