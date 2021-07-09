@@ -9,7 +9,7 @@
 # Designer :石川公彬
 # Date :2021.06.22
 # Function:DBにスレッドの名前と詳細を登録し、スレッドIDを抽出し、情報をnewThreadで返す
-# Return :newThread
+# Return :newThreadId
 #################################################
 
 import sqlite3
@@ -47,7 +47,7 @@ def threadRegistration(name, details):
 # Designer :石川公彬
 # Date :2021.06.22
 # Function:スレッドIDからDBを検索し、スレッド情報を取得する
-# Return :newThread
+# Return :thread
 #################################################
 
 # スレッド情報取得
@@ -70,7 +70,7 @@ def getThread(id):
     cur.close()
     conn.close()
 
-    # newThreadにスレッドの情報を入れる
+    # threadにスレッドの情報を入れる
     return thread
 
 #################################################
@@ -78,7 +78,7 @@ def getThread(id):
 # Designer : 石川公彬
 # Date :　2021/06/25
 # Function:　DBからスレッドの情報を検索し、それをresultThreadで返す
-# Return :returnThread
+# Return :returnThreads
 #################################################
 
 # スレッド検索
