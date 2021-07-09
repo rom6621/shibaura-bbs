@@ -43,7 +43,7 @@ def contentsProcessing(threadId):
 ### Function Name : deleteContents
 ### Designer : 保科貴大
 ### Date :  2021.6.18
-### Function: entry.idとentry.idからcontentを指定して
+### Function: entry.idとthreadIdからcontentを指定して
 ###　　　　　　"書込を更新する
 ### Return :
 #################################################
