@@ -22,7 +22,9 @@ def login():
         if user != None:
             session['userId'] = user.id
             session['userName'] = user.name
-        return redirect(url_for('displayThreadList'))
+            return redirect(url_for('displayThreadList'))
+        else:
+            return render_template('login.html', cliend_id=cliend_id, login=False)
     else:
         if 'userId' in session:
             session.clear()
