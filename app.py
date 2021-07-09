@@ -1,3 +1,15 @@
+#################################################
+### Designer : 浅瀬石 遊那, 佐藤直輝
+### Date :2021.07.09
+### Purpose : C1のUIの入出力を処理する
+#################################################
+
+### Revision :
+### V1.0 : 開米, 2021.06.13
+### V1.1 : 開米, 2021.06.15 writeEntry, deleteEntry
+### V1.2 : 修正者名, yyyy.mm.dd 改訂モジュール名を書く
+### V1.3 : 修正者名, yyyy.mm.dd 改訂モジュール名を書く
+
 from os import name
 from manageUsers import userNameUpdate
 from flask import Flask, render_template, redirect, url_for, request, session
@@ -13,6 +25,14 @@ socketio = SocketIO(app)
 @app.route('/')
 def index():
     return redirect(url_for('login'))
+
+#################################################
+### Function Name : ログイン・マイページ処理
+### Designer : 浅瀬石 遊那
+### Date :2021.06.13
+### Function: ログイン画面やマイページ処理からの入出力を処理する
+### Return : ログイン画面，マイページ画面
+#################################################
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -45,6 +65,14 @@ def displayMypage():
     else:
         return redirect(url_for('login'))
 
+#################################################
+### Function Name : スレッド処理
+### Designer : 佐藤 直輝
+### Date :2021.07.9
+### Function: スレッド作成やスレッド一覧画面を出力する
+### Return : スレッド作成画面, スレッド一覧画面
+#################################################
+
 @app.route('/makeThread', methods=['GET', 'POST'])
 def makeThread():
     if 'userId' in session:
@@ -58,15 +86,6 @@ def makeThread():
     else:
         return redirect(url_for('login'))
 
-@app.route('/thread', methods=['GET'])
-def displayThread():
-    if 'userId' in session:
-        id = request.args.get('thread')
-        thread = classes.Thread.getThread(id)
-        return render_template('thread.html', thread=thread)
-    else:
-        return redirect(url_for('login'))
-
 @app.route('/threadList', methods=['GET'])
 def displayThreadList():
     if 'userId' in session:
@@ -77,6 +96,23 @@ def displayThreadList():
             search = ""
         threads = thread.analyzeKeyword(search)
         return render_template('threadList.html', threads=threads)
+    else:
+        return redirect(url_for('login'))
+
+#################################################
+### Function Name : スレッド表示処理
+### Designer : 佐藤 直輝
+### Date :2021.07.6
+### Function: スレッド画面を表示する
+### Return : スレッド画面
+#################################################
+
+@app.route('/thread', methods=['GET'])
+def displayThread():
+    if 'userId' in session:
+        id = request.args.get('thread')
+        thread = classes.Thread.getThread(id)
+        return render_template('thread.html', thread=thread)
     else:
         return redirect(url_for('login'))
 
