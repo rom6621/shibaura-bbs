@@ -2,10 +2,10 @@
 ### File Name : mypage.html
 ### Version : V1.0
 ### Designer : 佐藤 直輝
-### Date :2021.07.06
+### Date :2021.06.25
 ### Purpose : M5 マイページ処理
 ### Revision :
-### V1.0 : 佐藤 2021.07.06
+### V1.0 : 佐藤 2021.06.25
 ################################################# -->
 
 <!DOCTYPE html>
@@ -72,15 +72,15 @@ const nameBtn = document.getElementById('nameBtn'); // 提出ボタン
 // 名前欄のバリデーション
 function checkName() {
     let submitFlg = true;
-    if(userName.value.length === 0 ){ 
-        alert('名前が入力されていません'); 
+    if(userName.value.length === 0 ){
+        alert('名前が入力されていません');
         submitFlg = false;
     }
     else if(userName.value.length > 10 ){
         alert('入力欄が文字数オーバーです');
         submitFlg = false;
     }
-    return submitFlg; 
+    return submitFlg;
 }
 
 // 長さの処理
@@ -91,7 +91,7 @@ function showLength4() {
     } else if(userName.value.length <= 10){
      inputNameLength.style.color = "#0b4e3c";
     }
- } 
+ }
 </script>
 </body>
 </html>
