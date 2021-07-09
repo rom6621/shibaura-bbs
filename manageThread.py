@@ -17,7 +17,7 @@
 # Function Name :threadRegistration
 # Designer :石川公彬
 # Date :2021.06.22
-# Function:DBにスレッドの名前と詳細を登録し、スレッドIDを抽出し、情報をnewThreadで返す
+# Function:DBにスレッドの名前と詳細を登録し、スレッドIDを抽出し、情報をnewThreadIdで返す
 # Return :newThreadId
 #################################################
 
