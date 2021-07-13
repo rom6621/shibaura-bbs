@@ -10,10 +10,11 @@ WebSocketを用いた掲示板
 - Flask-SocketIO
 - PyJWT
 - cryptography
+- gevent
 
 ### インストール
 ```
-pip install flask flask-socketio pyjwt cryptography
+pip install flask flask-socketio pyjwt cryptography gevent
 ```
 
 ###  実行
