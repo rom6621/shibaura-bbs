@@ -2,7 +2,6 @@
 
 ## Overview
 WebSocketを用いた掲示板
-
 ※芝浦学生のみ
 
 ## How to work
@@ -26,7 +25,6 @@ python createDB.py
 ```
 python server.py
 ```
-or
 #### ローカル環境の場合
 ```
 python app.py
