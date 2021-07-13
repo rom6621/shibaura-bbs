@@ -1,36 +1,36 @@
 # ShibauraBBS
 
 ## Overview
-Internet discussion board using WebSocket
+WebSocketを用いた掲示板
 
-※Only students of Shibaura Institute of Technology
+※芝浦学生のみ
 
 ## How to work
-### Packages
+### パッケージ
 - Flask
 - Flask-SocketIO
 - PyJWT
 - cryptography
 
-### Install
+### インストール
 ```
 pip install flask flask-socketio pyjwt cryptography
 ```
 
-###  Run
-# DBの初期化
+###  実行
+#### DBの初期化
 ```
 python createDB.py
 ```
-# サーバの場合
+#### サーバの場合
 ```
 python server.py
 ```
 or
-# ローカル環境の場合
+#### ローカル環境の場合
 ```
 python app.py
 ```
 
-## Authors
-Group 5
+## グループ
+5班
