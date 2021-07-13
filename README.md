@@ -17,16 +17,16 @@ WebSocketを用いた掲示板
 pip install flask flask-socketio pyjwt cryptography gevent
 ```
 
-###  実行
+###  実行方法
 #### DBの初期化
 ```
 python createDB.py
 ```
-#### サーバの場合
+#### 50500ポートで実行する場合
 ```
 python server.py
 ```
-#### ローカル環境の場合
+#### 5000ポートで実行する場合
 ```
 python app.py
 ```
