@@ -18,10 +18,16 @@ pip install flask flask-socketio pyjwt cryptography
 ```
 
 ###  Run
+# DBの初期化
+```
+python createDB.py
+```
+# サーバの場合
 ```
 python server.py
 ```
 or
+# ローカル環境の場合
 ```
 python app.py
 ```
