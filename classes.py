@@ -16,12 +16,14 @@ import manageThread
 import manageEntry
 import manageUsers
 
+#スレッドのクラス
 class Thread:
     id: int
     name: str
     details: str
     lastEntryId: int
     entries = []
+    #スレッドID、スレッド名、詳細、書込み数、書込み
 
     def __init__(self, threadId, threadName, threadDetails, entries=[], lastId=0):
         self.id = threadId
@@ -65,6 +67,7 @@ class Thread:
 
     @classmethod
     def createThread(cls, threadName, threadDetails):
+        #管理部にスレッド名と詳細を送り、紐づいたIDを作ってもらう
         threadId = manageThread.threadRegistration(threadName, threadDetails)
         return cls(threadId, threadName, threadDetails)
 
@@ -100,9 +103,11 @@ class Thread:
         self.entries[id-1].content = '削除されました'
         manageEntry.deleteContents(self.entries[id-1], self.id)
 
+#書き込みクラス
 class Entry:
-    id: int #書込の順番
+    id: int
     content: str
+    #書込みの順番、内容
 
     def __init__(self, entryId, entryAuthor, entryContent):
         self.id = entryId
