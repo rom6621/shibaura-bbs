@@ -22,7 +22,7 @@ import manageUsers
 def contentsProcessing(threadId):
     entries = []
      #データベースに接続
-    conn = sqlite3.connect('test.db')
+    conn = sqlite3.connect('BBS.db')
     #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
     #Entryテーブルからcontentを抜き出す
@@ -52,7 +52,7 @@ def contentsProcessing(threadId):
 
 def deleteContents(entry, threadId):
      #データベースに接続
-    conn = sqlite3.connect('test.db')
+    conn = sqlite3.connect('BBS.db')
     #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
     #contentを更新する
@@ -75,7 +75,7 @@ def deleteContents(entry, threadId):
 
 def addContents(entry,threadId):
     #データベースに接続
-    conn = sqlite3.connect('test.db')
+    conn = sqlite3.connect('BBS.db')
     #sqliteを操作するカーソルオブジェクトを作成
     c = conn.cursor()
     #userID,threadID,contentをEntryテーブルに追加する

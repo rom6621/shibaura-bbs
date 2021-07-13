@@ -11,7 +11,6 @@
 ### V1.3 : 開米, 2021.06.25 getThread, createThread追加
 
 
-import thread
 import manageThread
 import manageEntry
 import manageUsers
