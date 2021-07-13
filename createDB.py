@@ -1,7 +1,7 @@
 # このファイルはデータベース作成時のみ実行してください
 import sqlite3, os
 
-dbname = 'test.db'
+dbname = 'BBS.db'
 
 if os.path.exists(dbname):
     os.remove(dbname)

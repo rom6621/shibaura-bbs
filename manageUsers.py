@@ -28,7 +28,7 @@ import sqlite3
 import classes
 
 def userRegistrationRequest(mailAddress):
-    dbname = 'test.db' #データベース作成　or 参照
+    dbname = 'BBS.db' #データベース作成　or 参照
     conn = sqlite3.connect(dbname)
     # sqliteを操作するカーソルオブジェクトを作成
     cur = conn.cursor()
@@ -75,7 +75,7 @@ def userRegistrationRequest(mailAddress):
 #################################################
 
 def userNameUpdate(id,nName):
-    dbname = 'test.db' #データベース作成　or 参照
+    dbname = 'BBS.db' #データベース作成　or 参照
     conn = sqlite3.connect(dbname)
     # sqliteを操作するカーソルオブジェクトを作成
     cur = conn.cursor()
@@ -95,7 +95,7 @@ def userNameUpdate(id,nName):
 #################################################
 
 def getUser(id):
-    dbname = 'test.db' #データベース作成　or 参照
+    dbname = 'BBS.db' #データベース作成　or 参照
     conn = sqlite3.connect(dbname)
     # sqliteを操作するカーソルオブジェクトを作成
     cur = conn.cursor()

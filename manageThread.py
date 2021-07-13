@@ -30,7 +30,7 @@ import classes
 def threadRegistration(name, details):
 
     # データベース作成
-    conn = sqlite3.connect("test.db")
+    conn = sqlite3.connect("BBS.db")
     # カーソルオブジェクトの作成
     cur = conn.cursor()
 
@@ -65,7 +65,7 @@ def threadRegistration(name, details):
 def getThread(id):
 
     # データベース作成
-    conn = sqlite3.connect("test.db")
+    conn = sqlite3.connect("BBS.db")
     # カーソルオブジェクトの作成
     cur = conn.cursor()
 
@@ -99,7 +99,7 @@ def search(searchKeys):
 
     resultThreads = []
 
-    conn = sqlite3.connect("test.db")
+    conn = sqlite3.connect("BBS.db")
     cur = conn.cursor()
 
     sql = 'SELECT id FROM Thread'
