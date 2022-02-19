@@ -1,4 +1,4 @@
-# ShibauraBBS
+# shibaura bbs
 
 ## Overview
 WebSocketを用いた掲示板
